@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SachiTech — Data Analysis Syllabus</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0d0d0d;
+    --paper: #f5f2eb;
+    --accent: #e84a2f;
+    --gold: #c8952a;
+    --muted: #6b6560;
+    --border: #d4cfc7;
+    --blue: #1a3a5c;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Mono', monospace;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── HEADER ── */
+  header {
+    border-bottom: 2px solid var(--ink);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header-top {
+    display: flex;
+    align-items: stretch;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .logo-block {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 1.2rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 200px;
+  }
+
+  .logo-block .brand {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.6rem;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+
+  .logo-block .brand span { color: var(--accent); }
+
+  .logo-block .tagline {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: #aaa;
+    margin-top: 4px;
+    text-transform: uppercase;
+  }
+
+  .header-meta {
+    padding: 1.2rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-left: 1px solid var(--border);
+    flex: 1;
+  }
+
+  .course-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.8rem;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    color: var(--ink);
+  }
+
+  .course-title span { color: var(--accent); }
+
+  .course-sub {
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    margin-top: 6px;
+    text-transform: uppercase;
+  }
+
+  .header-stats {
+    display: flex;
+    border-left: 1px solid var(--border);
+  }
+
+  .stat-cell {
+    padding: 1.2rem 1.5rem;
+    border-left: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    min-width: 90px;
+  }
+
+  .stat-cell .num {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.6rem;
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  .stat-cell .lbl {
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-top: 3px;
+  }
+
+  /* faculty strip */
+  .faculty-strip {
+    display: flex;
+    align-items: center;
+    padding: 0.7rem 2rem;
+    gap: 2rem;
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .faculty-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #888;
+    white-space: nowrap;
+  }
+
+  .faculty-list {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .faculty-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.65rem;
+    flex-shrink: 0;
+  }
+
+  .av-red { background: var(--accent); color: white; }
+  .av-gold { background: var(--gold); color: white; }
+
+  .faculty-info .name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: var(--paper);
+  }
+
+  .faculty-info .role {
+    font-size: 0.6rem;
+    color: #888;
+    letter-spacing: 0.06em;
+  }
+
+  /* ── MAIN GRID ── */
+  .main {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    min-height: calc(100vh - 130px);
+  }
+
+  /* sidebar */
+  .sidebar {
+    border-right: 1px solid var(--border);
+    padding: 1.5rem 0;
+    position: sticky;
+    top: 0;
+    height: fit-content;
+  }
+
+  .sidebar-section {
+    padding: 0 1.25rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 1rem;
+  }
+
+  .sidebar-title {
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.75rem;
+  }
+
+  .track-nav a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 8px;
+    border-radius: 4px;
+    font-size: 0.72rem;
+    color: var(--muted);
+    text-decoration: none;
+    transition: all 0.15s;
+    margin-bottom: 2px;
+  }
+
+  .track-nav a:hover { background: var(--border); color: var(--ink); }
+
+  .track-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .info-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.68rem;
+    padding: 4px 0;
+    border-bottom: 1px dashed var(--border);
+    color: var(--muted);
+  }
+  .info-row:last-child { border-bottom: none; }
+  .info-row strong { color: var(--ink); }
+
+  .badge-cert {
+    background: var(--accent);
+    color: white;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    display: inline-block;
+    margin-top: 8px;
+  }
+
+  /* content */
+  .content {
+    padding: 0;
+  }
+
+  /* track block */
+  .track {
+    border-bottom: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 200px 1fr;
+  }
+
+  .track-head {
+    padding: 1.5rem 1.25rem;
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 8px;
+  }
+
+  .track-num {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 2.5rem;
+    line-height: 1;
+    opacity: 0.12;
+  }
+
+  .track-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+
+  .track-weeks {
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  .track-tag {
+    display: inline-block;
+    font-size: 0.58rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border: 1px solid;
+    width: fit-content;
+  }
+
+  .track-body {
+    padding: 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 0.75rem;
+    align-content: start;
+  }
+
+  .module-card {
+    border: 1px solid var(--border);
+    padding: 0.75rem;
+    background: white;
+    transition: border-color 0.15s;
+  }
+
+  .module-card:hover { border-color: var(--ink); }
+
+  .module-card .mod-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 0.78rem;
+    color: var(--ink);
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+
+  .mod-topics {
+    list-style: none;
+  }
+
+  .mod-topics li {
+    font-size: 0.63rem;
+    color: var(--muted);
+    padding: 2px 0;
+    padding-left: 10px;
+    position: relative;
+    line-height: 1.4;
+  }
+
+  .mod-topics li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--border);
+  }
+
+  /* color coding */
+  .t1 .track-num { color: #1a3a5c; }
+  .t1 .track-tag { color: #1a3a5c; border-color: #1a3a5c; }
+
+  .t2 .track-num { color: #c8952a; }
+  .t2 .track-tag { color: #c8952a; border-color: #c8952a; }
+
+  .t3 .track-num { color: #2d7a4f; }
+  .t3 .track-tag { color: #2d7a4f; border-color: #2d7a4f; }
+
+  .t4 .track-num { color: #8b2fc9; }
+  .t4 .track-tag { color: #8b2fc9; border-color: #8b2fc9; }
+
+  .t5 .track-num { color: #e84a2f; }
+  .t5 .track-tag { color: #e84a2f; border-color: #e84a2f; }
+
+  .t6 .track-num { color: #1a3a5c; }
+  .t6 .track-tag { color: #1a3a5c; border-color: #1a3a5c; }
+
+  .t7 .track-num { color: #c8952a; }
+  .t7 .track-tag { color: #c8952a; border-color: #c8952a; }
+
+  /* accent bar on left of track header */
+  .t1 .track-head { border-left: 3px solid #1a3a5c; }
+  .t2 .track-head { border-left: 3px solid #c8952a; }
+  .t3 .track-head { border-left: 3px solid #2d7a4f; }
+  .t4 .track-head { border-left: 3px solid #8b2fc9; }
+  .t5 .track-head { border-left: 3px solid #e84a2f; }
+  .t6 .track-head { border-left: 3px solid #1a3a5c; }
+  .t7 .track-head { border-left: 3px solid #c8952a; }
+
+  /* footer */
+  footer {
+    border-top: 2px solid var(--ink);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  footer .f-brand {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
+  }
+
+  footer .f-brand span { color: var(--accent); }
+
+  footer .f-note {
+    font-size: 0.65rem;
+    color: #888;
+    letter-spacing: 0.06em;
+  }
+
+  footer .f-copy {
+    font-size: 0.65rem;
+    color: #666;
+  }
+
+  /* print */
+  @media print {
+    .sidebar { display: none; }
+    .main { grid-template-columns: 1fr; }
+    .track { page-break-inside: avoid; }
+  }
+
+  @media (max-width: 768px) {
+    .main { grid-template-columns: 1fr; }
+    .sidebar { display: none; }
+    .track { grid-template-columns: 1fr; }
+    .track-head { border-right: none; border-bottom: 1px solid var(--border); }
+    .header-stats { display: none; }
+    .track-body { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-top">
+    <div class="logo-block">
+      <div class="brand">Sachi<span>Tech</span></div>
+      <div class="tagline">Institute of Technology</div>
+    </div>
+    <div class="header-meta">
+      <div class="course-title">Data <span>Analysis</span><br>Complete Syllabus</div>
+      <div class="course-sub">Python · ML · Statistics · Deep Learning · Excel · SQL · Power BI</div>
+    </div>
+    <div class="header-stats">
+      <div class="stat-cell"><div class="num">7</div><div class="lbl">Tracks</div></div>
+      <div class="stat-cell"><div class="num">35+</div><div class="lbl">Modules</div></div>
+      <div class="stat-cell"><div class="num">40</div><div class="lbl">Weeks</div></div>
+    </div>
+  </div>
+  <div class="faculty-strip">
+    <div class="faculty-label">Faculty</div>
+    <div class="faculty-list">
+      <div class="faculty-item">
+        <div class="avatar av-red">ST</div>
+        <div class="faculty-info">
+          <div class="name">Sachin Thete</div>
+          <div class="role">Director, SachiTech</div>
+        </div>
+      </div>
+      <div class="faculty-item">
+        <div class="avatar av-gold">KP</div>
+        <div class="faculty-info">
+          <div class="name">Kunal Patil</div>
+          <div class="role">Data Scientist</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="main">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-title">Tracks</div>
+      <nav class="track-nav">
+        <a href="#python"><div class="track-dot" style="background:#1a3a5c;"></div>Python</a>
+        <a href="#excel"><div class="track-dot" style="background:#c8952a;"></div>Advanced Excel</a>
+        <a href="#sql"><div class="track-dot" style="background:#2d7a4f;"></div>SQL</a>
+        <a href="#powerbi"><div class="track-dot" style="background:#8b2fc9;"></div>Power BI</a>
+        <a href="#stats"><div class="track-dot" style="background:#e84a2f;"></div>Statistics</a>
+        <a href="#ml"><div class="track-dot" style="background:#1a3a5c;"></div>Machine Learning</a>
+        <a href="#dl"><div class="track-dot" style="background:#c8952a;"></div>Deep Learning</a>
+      </nav>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-title">Course Info</div>
+      <div class="info-row"><span>Duration</span><strong>~40 weeks</strong></div>
+      <div class="info-row"><span>Level</span><strong>0 → Expert</strong></div>
+      <div class="info-row"><span>Mode</span><strong>Offline / Online</strong></div>
+      <div class="info-row"><span>Projects</span><strong>7 Capstone</strong></div>
+      <div class="info-row"><span>Tools</span><strong>Python, SQL, PBI</strong></div>
+      <div class="badge-cert">Certificate Course</div>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-title">Contact</div>
+      <div class="info-row" style="flex-direction:column;gap:2px;">
+        <span style="color:var(--muted);">SachiTech Institute</span>
+        <strong style="font-size:0.65rem;">www.sachitech.in</strong>
+      </div>
+    </div>
+  </aside>
+
+  <!-- CONTENT -->
+  <main class="content">
+
+    <!-- TRACK 1: PYTHON -->
+    <section class="track t1" id="python">
+      <div class="track-head">
+        <div class="track-num">01</div>
+        <div class="track-name">Python Programming</div>
+        <div class="track-weeks">5 weeks</div>
+        <div class="track-tag">Beginner</div>
+      </div>
+      <div class="track-body">
+        <div class="module-card">
+          <div class="mod-title">Introduction & Setup</div>
+          <ul class="mod-topics">
+            <li>What is Python & its features</li>
+            <li>Installing Python, Jupyter Notebook</li>
+            <li>Google Colab setup</li>
+            <li>Running .py scripts</li>
+          </ul>
+        </div>
+        <div class="module-card">
+          <div class="mod-title">Syntax, Data Types & Operators</div>
+          <ul class="mod-topics">
+            <li>Variables, int, float, str, bool, None</li>
+            <li>Type conversion (implicit & explicit)</li>
+            <li>Arithmetic, comparison, logical operators</li>
+            <li>Membership & identity operators</li>
+          </ul>
+        </div>
+        <div class="module-card">
+          <div class="mod-title">Data Structures</div>
+          <ul class="mod-topics">
+            <li>Lists, indexing, slicing, comprehension</li>
+            <li>Tuples — immutability, count(), index()</li>
+            <li>Dictionaries — keys, values, items</li>
+            <li>Sets — union, intersection, difference</li>
+          </ul>
+        </div>
+        <div class="module-card">
+          <div class="mod-title">Control Flow & Functions</div>
+          <ul class="mod-topics">
+            <li>if / elif / else conditionals</li>
+            <li>for & while loops, break, continue</li>
+            <li>def, arguments, default & keyword args</li>
+            <li>Lambda functions, return values</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRACK 2: ADVANCED EXCEL -->
+    <section class="track t2" id="excel">
+      <div class="track-head">
+        <div class="track-num">02</div>
+        <div class="track-name">Advanced Excel</div>
+        <div class="track-weeks">4 weeks</div>
+        <div class="track-tag">Intermediate</div>
+      </div>
+      <div class="track-body">
+        <div class="module-card">
+          <div class="mod-title">Advanced Formulas</div>
+          <ul class="mod-topics">
+            <li>VLOOKUP, HLOOKUP, XLOOKUP</li>
+            <li>INDEX / MATCH combinations</li>
+            <li>Nested IF, array formulas</li>
+            <li>SUMIFS, COUNTIFS, AVERAGEIFS</li>
+          </ul>
+        </div>
+        <div class="module-card">
+          <div class="mod-title">Pivot Tables & Power Query</div>
+          <ul class="mod-topics">
+            <li>Pivot tables, slicers, calculated fields</li>
+            <li>Power Query — ETL workflows</li>
+            <li>Power Pivot & data modeling</li>
+            <li>DAX basics</li>
+          </ul>
+        </div>
+        <div class="module-card">
+          <div class="mod-title">Dashboards & Macros</div>
+          <ul class="mod-topics">
+            <li>Chart types, conditional formatting</li>
+            <li>Dynamic dashboards with slicers</li>
+            <li>VBA macro basics</li>
+            <li>Data validation & protection</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRACK 3: SQL -->
+    <section class="track t3" id="sql">
+      <div class="track-head">
+        <div class="track-num">03</div>
+        <div class="track-name">SQL</div>
+        <div class="track-weeks">4 weeks</div>
+        <div class="track-tag">Intermediate</div>
+      </div>
+      <div class="track-body">
+        <div class="module-card">
+          <div class="mod-title">SQL Fundamentals</div>
+          <ul class="mod-topics">
+            <li>SELECT, WHERE, GROUP BY, ORDER BY</li>
+            <li>HAVING, DISTINCT, LIMIT</li>
+            <li>Aggregate: COUNT, SUM, AVG, MIN, MAX</li>
+            <li>Filtering & sorting data</li>
+          </ul>
+        </div>
+        <div class="module-card">
+          <div class="mod-title">Joins, Subqueries & CTEs</div>
+          <ul class="mod-topics">
+            <li>INNER, LEFT, RIGHT, FULL joins</li>
+            <li>Nested subqueries</li>
+            <li>WITH clause (CTEs)</li>
+            <li>UNION, INTERSECT, EXCEPT</li>
+          </ul>
+        </div>
+        <div class="module-card">
+          <div class="mod-title">Window Functions</div>
+          <ul class="mod-topics">
+            <li>ROW_NUMBER, RANK, DENSE_RANK</li>
+            <li>LEAD, LAG, PARTITION BY</li>
+            <li>Running totals & moving averages</li>
+            <li>Query performance & indexing</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRACK 4: POWER BI -->
+    <section class="track t4" id="powerbi">
+      <div class="track-head">
+        <div class="track-num">04</div>
+        <div class="track-name">Power BI</div>
+        <div class="track-weeks">4 weeks</div>
+        <div class="track-tag">Intermediate</div>
+      </div>
+      <div class="track-body">
+        <div class="module-card">
+          <div class="mod-title">Data Ingestion & Power Query</div>
+          <ul class="mod-topics">
+            <li>Connecting to Excel, SQL, CSV sources</li>
+            <li>Transforming data with Power Query</li>
+            <li>M language basics</li>
+            <li>Append & merge queries</li>
+          </ul>
+        </div>
+        <div class="module-card">
+          <div class="mod-title">DAX & Data Modeling</div>
+          <ul class="mod-topics">
+            <li>Calculated columns & measures</li>
+            <li>CALCULATE, FILTER, ALL, SUMX</li>
+            <li>Table relationships & star schema</li>
+            <li>Time intelligence functions</li>
+          </ul>
+        </div>
+        <div class="module-card">
+          <div class="mod-title">Dashboards & Publishing</div>
+          <ul class="mod-topics">
+            <li>Chart types, maps, KPI visuals</li>
+            <li>Drill-through, bookmarks, tooltips</li>
+            <li>Row-level security (RLS)</li>
+            <li>Publishing to Power BI Service</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRACK 5: STATISTICS -->
+    <section class="track t5" id="stats">
+      <div class="track-head">
+        <div class="track-num">05</div>
+        <div class="track-name">Statistics</div>
+        <div class="track-weeks">5 weeks</div>
+        <div class="track-tag">Core Theory</div>
+      </div>
+      <div class="track-body">
+        <div class="module-card">
+          <div class="mod-title">Descriptive Statistics</div>
+          <ul class="mod-topics">
+            <li>Mean, median, mode</li>
+            <li>Variance, std deviation</li>
+            <li>Skewness & kurtosis</li>
+            <li>Percentiles & IQR</li>
+          </ul>
+        </div>
+        <div class="module-card">
+          <div class="mod-title">Probability & Distributions</div>
+          <ul class="mod-topics">
+            <li>Bayes theorem</li>
+            <li>Normal, binomial, Poisson</li>
+            <li>Central limit theorem</li>
+            <li>Confidence intervals</li>
+          </ul>
+        </div>
+        <div class="module-card">
+          <div class="mod-title">Inferential Statistics</div>
+          <ul class="mod-topics">
+            <li>Hypothesis testing, p-value</li>
+            <li>t-test, z-test, chi-square</li>
+            <li>ANOVA</li>
+            <li>Type I & Type II errors</li>
+          </ul>
+        </div>
+        <div class="module-card">
+          <div class="mod-title">Correlation & Regression</div>
+          <ul class="mod-topics">
+            <li>Pearson & Spearman correlation</li>
+            <li>Simple & multiple regression</li>
+            <li>R², RMSE, MAE</li>
+            <li>Multicollinearity</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRACK 6: MACHINE LEARNING -->
+    <section class="track t6" id="ml">
+      <div class="track-head">
+        <div class="track-num">06</div>
+        <div class="track-name">Machine Learning</div>
+        <div class="track-weeks">8 weeks</div>
+        <div class="track-tag">Advanced</div>
+      </div>
+      <div class="track-body">
+        <div class="module-card">
+          <div class="mod-title">Data Preprocessing</div>
+          <ul class="mod-topics">
+            <li>Handling missing values (mean/median/mode)</li>
+            <li>One-hot & label encoding</li>
+            <li>Normalization vs standardization</li>
+            <li>Outlier handling: Z-score, IQR</li>
+          </ul>
+        </div>
+        <div class="module-card">
+          <div class="mod-title">Supervised — Regression</div>
+          <ul class="mod-topics">
+            <li>Linear & multiple regression</li>
+            <li>Polynomial regression</li>
+            <li>Ridge & Lasso regression</li>
+            <li>Metrics: RMSE, MAE, R²</li>
+          </ul>
+        </div>
+        <div class="module-card">
+          <div class="mod-title">Supervised — Classification</div>
+          <ul class="mod-topics">
+            <li>Logistic regression</li>
+            <li>Decision Trees, Random Forest</li>
+            <li>SVM, KNN</li>
+            <li>Accuracy, Precision, Recall, F1, ROC</li>
+          </ul>
+        </div>
+        <div class="module-card">
+          <div class="mod-title">Unsupervised Learning</div>
+          <ul class="mod-topics">
+            <li>K-Means, Hierarchical clustering</li>
+            <li>DBSCAN</li>
+            <li>PCA, t-SNE</li>
+            <li>Dimensionality reduction</li>
+          </ul>
+        </div>
+        <div class="module-card">
+          <div class="mod-title">Model Evaluation & Tuning</div>
+          <ul class="mod-topics">
+            <li>Train-test split, k-fold CV</li>
+            <li>Overfitting vs underfitting</li>
+            <li>GridSearchCV, RandomizedSearchCV</li>
+            <li>Feature importance</li>
+          </ul>
+        </div>
+        <div class="module-card">
+          <div class="mod-title">Visualization for ML</div>
+          <ul class="mod-topics">
+            <li>Matplotlib & Seaborn</li>
+            <li>Histograms, box plots, scatter</li>
+            <li>Heatmaps & correlation matrix</li>
+            <li>Confusion matrix plots</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRACK 7: DEEP LEARNING -->
+    <section class="track t7" id="dl">
+      <div class="track-head">
+        <div class="track-num">07</div>
+        <div class="track-name">Deep Learning</div>
+        <div class="track-weeks">10 weeks</div>
+        <div class="track-tag">Expert</div>
+      </div>
+      <div class="track-body">
+        <div class="module-card">
+          <div class="mod-title">Neural Network Fundamentals</div>
+          <ul class="mod-topics">
+            <li>Perceptron, activation functions</li>
+            <li>Forward & backpropagation</li>
+            <li>Gradient descent & optimizers</li>
+            <li>Loss functions</li>
+          </ul>
+        </div>
+        <div class="module-card">
+          <div class="mod-title">TensorFlow & Keras</div>
+          <ul class="mod-topics">
+            <li>Building sequential models</li>
+            <li>Compiling, training & saving</li>
+            <li>Callbacks, early stopping</li>
+            <li>Batch normalization, dropout</li>
+          </ul>
+        </div>
+        <div class="module-card">
+          <div class="mod-title">CNNs — Computer Vision</div>
+          <ul class="mod-topics">
+            <li>Convolution & pooling layers</li>
+            <li>Image classification</li>
+            <li>Transfer learning: ResNet, VGG</li>
+            <li>Data augmentation</li>
+          </ul>
+        </div>
+        <div class="module-card">
+          <div class="mod-title">RNNs & LSTMs</div>
+          <ul class="mod-topics">
+            <li>Sequential data & time series</li>
+            <li>Vanishing gradient problem</li>
+            <li>LSTM & GRU architectures</li>
+            <li>Text generation basics</li>
+          </ul>
+        </div>
+        <div class="module-card">
+          <div class="mod-title">NLP Fundamentals</div>
+          <ul class="mod-topics">
+            <li>Tokenization, stopwords, stemming</li>
+            <li>Word embeddings: Word2Vec, GloVe</li>
+            <li>Sentiment analysis</li>
+            <li>Text classification</li>
+          </ul>
+        </div>
+        <div class="module-card">
+          <div class="mod-title">Transformers & Attention</div>
+          <ul class="mod-topics">
+            <li>Self-attention mechanism</li>
+            <li>BERT, GPT architecture</li>
+            <li>Fine-tuning pretrained models</li>
+            <li>Hugging Face basics</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  <div>
+    <div class="f-brand">Sachi<span>Tech</span> Institute</div>
+    <div class="f-note">Directed by Sachin Thete · Data Science by Kunal Patil</div>
+  </div>
+  <div class="f-copy">© 2025 SachiTech. All rights reserved. · Data Analysis Complete Syllabus</div>
+</footer>
+
+</body>
+</html>
