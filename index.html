@@ -7,16 +7,22 @@
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ink: #0d0d0d;
-    --paper: #f5f2eb;
+    --ink: #0b0c10;
+    --paper: #f7f4ef;
     --accent: #e84a2f;
     --gold: #c8952a;
     --muted: #6b6560;
-    --border: #d4cfc7;
+    --border: #ddd9d1;
     --blue: #1a3a5c;
+    --green: #2d7a4f;
+    --purple: #8b2fc9;
+    --card-bg: #ffffff;
+    --sidebar-w: 240px;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
 
   body {
     background: var(--paper);
@@ -26,34 +32,61 @@
     overflow-x: hidden;
   }
 
-  /* ── HEADER ── */
+  /* ═══════════════════════════════════════
+     MOBILE NAV TOGGLE
+  ═══════════════════════════════════════ */
+  .mobile-nav-btn {
+    display: none;
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 1000;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: white;
+    border: none;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    font-size: 1.2rem;
+    transition: transform 0.2s, background 0.2s;
+  }
+  .mobile-nav-btn:hover { background: var(--accent); transform: scale(1.05); }
+
+  /* ═══════════════════════════════════════
+     HEADER
+  ═══════════════════════════════════════ */
   header {
     border-bottom: 2px solid var(--ink);
-    padding: 0;
-    position: relative;
-    overflow: hidden;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--paper);
   }
 
   .header-top {
     display: flex;
     align-items: stretch;
-    border-bottom: 1px solid var(--border);
   }
 
   .logo-block {
     background: var(--ink);
     color: var(--paper);
-    padding: 1.2rem 2rem;
+    padding: 1.1rem 1.75rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    min-width: 200px;
+    min-width: 180px;
+    flex-shrink: 0;
   }
 
   .logo-block .brand {
     font-family: 'Syne', sans-serif;
     font-weight: 800;
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     letter-spacing: -0.02em;
     line-height: 1;
   }
@@ -61,66 +94,71 @@
   .logo-block .brand span { color: var(--accent); }
 
   .logo-block .tagline {
-    font-size: 0.65rem;
-    letter-spacing: 0.15em;
-    color: #aaa;
-    margin-top: 4px;
+    font-size: 0.58rem;
+    letter-spacing: 0.16em;
+    color: #999;
+    margin-top: 5px;
     text-transform: uppercase;
   }
 
   .header-meta {
-    padding: 1.2rem 2rem;
+    padding: 1rem 1.75rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     border-left: 1px solid var(--border);
     flex: 1;
+    min-width: 0;
   }
 
   .course-title {
     font-family: 'Syne', sans-serif;
     font-weight: 700;
-    font-size: 1.8rem;
+    font-size: clamp(1.1rem, 2.5vw, 1.7rem);
     letter-spacing: -0.03em;
-    line-height: 1;
+    line-height: 1.1;
     color: var(--ink);
   }
 
   .course-title span { color: var(--accent); }
 
   .course-sub {
-    font-size: 0.7rem;
-    letter-spacing: 0.12em;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
     color: var(--muted);
-    margin-top: 6px;
+    margin-top: 5px;
     text-transform: uppercase;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .header-stats {
     display: flex;
     border-left: 1px solid var(--border);
+    flex-shrink: 0;
   }
 
   .stat-cell {
-    padding: 1.2rem 1.5rem;
+    padding: 1rem 1.25rem;
     border-left: 1px solid var(--border);
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: center;
-    min-width: 90px;
+    min-width: 78px;
   }
 
   .stat-cell .num {
     font-family: 'Syne', sans-serif;
     font-weight: 800;
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     color: var(--accent);
     line-height: 1;
   }
 
   .stat-cell .lbl {
-    font-size: 0.6rem;
+    font-size: 0.56rem;
     letter-spacing: 0.12em;
     color: var(--muted);
     text-transform: uppercase;
@@ -131,42 +169,46 @@
   .faculty-strip {
     display: flex;
     align-items: center;
-    padding: 0.7rem 2rem;
-    gap: 2rem;
+    padding: 0.65rem 1.75rem;
+    gap: 1.5rem;
     background: var(--ink);
     color: var(--paper);
+    border-top: 1px solid #222;
+    overflow-x: auto;
   }
 
   .faculty-label {
-    font-size: 0.6rem;
+    font-size: 0.58rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: #888;
+    color: #777;
     white-space: nowrap;
+    flex-shrink: 0;
   }
 
   .faculty-list {
     display: flex;
-    gap: 2rem;
-    flex-wrap: wrap;
+    gap: 1.5rem;
+    flex-wrap: nowrap;
   }
 
   .faculty-item {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 9px;
+    flex-shrink: 0;
   }
 
   .avatar {
-    width: 30px;
-    height: 30px;
+    width: 28px;
+    height: 28px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: 'Syne', sans-serif;
     font-weight: 700;
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     flex-shrink: 0;
   }
 
@@ -176,60 +218,67 @@
   .faculty-info .name {
     font-family: 'Syne', sans-serif;
     font-weight: 600;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     color: var(--paper);
   }
 
   .faculty-info .role {
-    font-size: 0.6rem;
+    font-size: 0.56rem;
     color: #888;
     letter-spacing: 0.06em;
   }
 
-  /* ── MAIN GRID ── */
-  .main {
+  /* ═══════════════════════════════════════
+     LAYOUT
+  ═══════════════════════════════════════ */
+  .wrapper {
     display: grid;
-    grid-template-columns: 220px 1fr;
-    min-height: calc(100vh - 130px);
+    grid-template-columns: var(--sidebar-w) 1fr;
+    min-height: calc(100vh - 100px);
   }
 
-  /* sidebar */
+  /* ═══════════════════════════════════════
+     SIDEBAR
+  ═══════════════════════════════════════ */
   .sidebar {
     border-right: 1px solid var(--border);
     padding: 1.5rem 0;
     position: sticky;
-    top: 0;
+    top: 100px;
     height: fit-content;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
   }
 
   .sidebar-section {
-    padding: 0 1.25rem 1.25rem;
+    padding: 0 1.1rem 1.1rem;
     border-bottom: 1px solid var(--border);
     margin-bottom: 1rem;
   }
 
   .sidebar-title {
-    font-size: 0.6rem;
+    font-size: 0.58rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--muted);
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.65rem;
   }
 
   .track-nav a {
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 5px 8px;
+    padding: 5px 7px;
     border-radius: 4px;
-    font-size: 0.72rem;
+    font-size: 0.68rem;
     color: var(--muted);
     text-decoration: none;
     transition: all 0.15s;
-    margin-bottom: 2px;
+    margin-bottom: 1px;
   }
 
-  .track-nav a:hover { background: var(--border); color: var(--ink); }
+  .track-nav a:hover,
+  .track-nav a.active { background: var(--ink); color: white; }
 
   .track-dot {
     width: 7px;
@@ -241,18 +290,18 @@
   .info-row {
     display: flex;
     justify-content: space-between;
-    font-size: 0.68rem;
+    font-size: 0.64rem;
     padding: 4px 0;
     border-bottom: 1px dashed var(--border);
     color: var(--muted);
   }
-  .info-row:last-child { border-bottom: none; }
+  .info-row:last-of-type { border-bottom: none; }
   .info-row strong { color: var(--ink); }
 
   .badge-cert {
     background: var(--accent);
     color: white;
-    font-size: 0.6rem;
+    font-size: 0.56rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     padding: 4px 10px;
@@ -260,54 +309,86 @@
     margin-top: 8px;
   }
 
-  /* content */
-  .content {
-    padding: 0;
+  /* progress bar */
+  .progress-wrap {
+    margin-top: 0.75rem;
   }
 
-  /* track block */
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.6rem;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+
+  .progress-bar {
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 6px;
+  }
+
+  .progress-fill {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 0.6s ease;
+  }
+
+  /* ═══════════════════════════════════════
+     CONTENT
+  ═══════════════════════════════════════ */
+  .content { padding: 0; }
+
+  /* track */
   .track {
     border-bottom: 1px solid var(--border);
     display: grid;
-    grid-template-columns: 200px 1fr;
+    grid-template-columns: 190px 1fr;
+    transition: background 0.2s;
   }
 
+  .track:target { scroll-margin-top: 110px; }
+
   .track-head {
-    padding: 1.5rem 1.25rem;
+    padding: 1.5rem 1.2rem;
     border-right: 1px solid var(--border);
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    gap: 8px;
+    gap: 6px;
+    position: relative;
+    overflow: hidden;
   }
 
   .track-num {
     font-family: 'Syne', sans-serif;
     font-weight: 800;
-    font-size: 2.5rem;
+    font-size: 2.8rem;
     line-height: 1;
-    opacity: 0.12;
+    opacity: 0.1;
+    letter-spacing: -0.04em;
   }
 
   .track-name {
     font-family: 'Syne', sans-serif;
     font-weight: 700;
-    font-size: 0.95rem;
-    line-height: 1.2;
+    font-size: 0.92rem;
+    line-height: 1.3;
     color: var(--ink);
   }
 
   .track-weeks {
-    font-size: 0.62rem;
+    font-size: 0.6rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--muted);
-    margin-top: 2px;
   }
 
   .track-tag {
     display: inline-block;
-    font-size: 0.58rem;
+    font-size: 0.55rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     padding: 3px 8px;
@@ -315,27 +396,50 @@
     width: fit-content;
   }
 
+  /* week pills */
+  .week-pills {
+    display: flex;
+    gap: 3px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+  }
+
+  .week-pill {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    background: var(--border);
+    transition: background 0.3s;
+  }
+
+  .week-pill.filled { background: currentColor; }
+
   .track-body {
-    padding: 1.5rem;
+    padding: 1.25rem;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 0.75rem;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 0.7rem;
     align-content: start;
   }
 
   .module-card {
     border: 1px solid var(--border);
-    padding: 0.75rem;
-    background: white;
-    transition: border-color 0.15s;
+    padding: 0.8rem;
+    background: var(--card-bg);
+    transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+    cursor: default;
   }
 
-  .module-card:hover { border-color: var(--ink); }
+  .module-card:hover {
+    border-color: var(--ink);
+    box-shadow: 3px 3px 0 var(--ink);
+    transform: translate(-2px, -2px);
+  }
 
   .module-card .mod-title {
     font-family: 'Syne', sans-serif;
     font-weight: 600;
-    font-size: 0.78rem;
+    font-size: 0.76rem;
     color: var(--ink);
     margin-bottom: 6px;
     line-height: 1.3;
@@ -346,12 +450,11 @@
   }
 
   .mod-topics li {
-    font-size: 0.63rem;
+    font-size: 0.62rem;
     color: var(--muted);
-    padding: 2px 0;
-    padding-left: 10px;
+    padding: 2px 0 2px 12px;
     position: relative;
-    line-height: 1.4;
+    line-height: 1.45;
   }
 
   .mod-topics li::before {
@@ -361,46 +464,55 @@
     color: var(--border);
   }
 
-  /* color coding */
-  .t1 .track-num { color: #1a3a5c; }
-  .t1 .track-tag { color: #1a3a5c; border-color: #1a3a5c; }
+  /* ═══════════════════════════════════════
+     TRACK COLOR CODING
+  ═══════════════════════════════════════ */
+  .t1 .track-num  { color: var(--blue); }
+  .t1 .track-tag  { color: var(--blue); border-color: var(--blue); }
+  .t1 .track-head { border-left: 3px solid var(--blue); }
+  .t1 .week-pill.filled { color: var(--blue); }
 
-  .t2 .track-num { color: #c8952a; }
-  .t2 .track-tag { color: #c8952a; border-color: #c8952a; }
+  .t2 .track-num  { color: var(--gold); }
+  .t2 .track-tag  { color: var(--gold); border-color: var(--gold); }
+  .t2 .track-head { border-left: 3px solid var(--gold); }
+  .t2 .week-pill.filled { color: var(--gold); }
 
-  .t3 .track-num { color: #2d7a4f; }
-  .t3 .track-tag { color: #2d7a4f; border-color: #2d7a4f; }
+  .t3 .track-num  { color: var(--green); }
+  .t3 .track-tag  { color: var(--green); border-color: var(--green); }
+  .t3 .track-head { border-left: 3px solid var(--green); }
+  .t3 .week-pill.filled { color: var(--green); }
 
-  .t4 .track-num { color: #8b2fc9; }
-  .t4 .track-tag { color: #8b2fc9; border-color: #8b2fc9; }
+  .t4 .track-num  { color: var(--purple); }
+  .t4 .track-tag  { color: var(--purple); border-color: var(--purple); }
+  .t4 .track-head { border-left: 3px solid var(--purple); }
+  .t4 .week-pill.filled { color: var(--purple); }
 
-  .t5 .track-num { color: #e84a2f; }
-  .t5 .track-tag { color: #e84a2f; border-color: #e84a2f; }
+  .t5 .track-num  { color: var(--accent); }
+  .t5 .track-tag  { color: var(--accent); border-color: var(--accent); }
+  .t5 .track-head { border-left: 3px solid var(--accent); }
+  .t5 .week-pill.filled { color: var(--accent); }
 
-  .t6 .track-num { color: #1a3a5c; }
-  .t6 .track-tag { color: #1a3a5c; border-color: #1a3a5c; }
+  .t6 .track-num  { color: var(--blue); }
+  .t6 .track-tag  { color: var(--blue); border-color: var(--blue); }
+  .t6 .track-head { border-left: 3px solid var(--blue); }
+  .t6 .week-pill.filled { color: var(--blue); }
 
-  .t7 .track-num { color: #c8952a; }
-  .t7 .track-tag { color: #c8952a; border-color: #c8952a; }
+  .t7 .track-num  { color: var(--gold); }
+  .t7 .track-tag  { color: var(--gold); border-color: var(--gold); }
+  .t7 .track-head { border-left: 3px solid var(--gold); }
+  .t7 .week-pill.filled { color: var(--gold); }
 
-  /* accent bar on left of track header */
-  .t1 .track-head { border-left: 3px solid #1a3a5c; }
-  .t2 .track-head { border-left: 3px solid #c8952a; }
-  .t3 .track-head { border-left: 3px solid #2d7a4f; }
-  .t4 .track-head { border-left: 3px solid #8b2fc9; }
-  .t5 .track-head { border-left: 3px solid #e84a2f; }
-  .t6 .track-head { border-left: 3px solid #1a3a5c; }
-  .t7 .track-head { border-left: 3px solid #c8952a; }
-
-  /* footer */
+  /* ═══════════════════════════════════════
+     FOOTER
+  ═══════════════════════════════════════ */
   footer {
     border-top: 2px solid var(--ink);
-    padding: 1rem 2rem;
+    padding: 1rem 1.75rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 0.75rem;
     background: var(--ink);
     color: var(--paper);
   }
@@ -410,38 +522,192 @@
     font-weight: 800;
     font-size: 1rem;
   }
-
   footer .f-brand span { color: var(--accent); }
+  footer .f-note { font-size: 0.62rem; color: #888; letter-spacing: 0.06em; }
+  footer .f-copy { font-size: 0.62rem; color: #666; }
 
-  footer .f-note {
-    font-size: 0.65rem;
-    color: #888;
-    letter-spacing: 0.06em;
+  /* ═══════════════════════════════════════
+     SEARCH BAR
+  ═══════════════════════════════════════ */
+  .search-wrap {
+    padding: 0.5rem 1.1rem 0.75rem;
   }
 
-  footer .f-copy {
+  .search-input {
+    width: 100%;
+    border: 1px solid var(--border);
+    padding: 6px 10px;
+    font-family: 'DM Mono', monospace;
     font-size: 0.65rem;
-    color: #666;
+    background: var(--card-bg);
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.15s;
   }
 
-  /* print */
+  .search-input:focus { border-color: var(--ink); }
+  .search-input::placeholder { color: #bbb; }
+
+  /* highlight */
+  mark {
+    background: #fff3b0;
+    color: var(--ink);
+    padding: 0 1px;
+  }
+
+  /* hidden */
+  .track.hidden { display: none; }
+  .module-card.hidden { display: none; }
+
+  /* ═══════════════════════════════════════
+     PRINT
+  ═══════════════════════════════════════ */
   @media print {
-    .sidebar { display: none; }
-    .main { grid-template-columns: 1fr; }
+    .sidebar, .mobile-nav-btn, .search-wrap { display: none; }
+    .wrapper { grid-template-columns: 1fr; }
+    header { position: static; }
     .track { page-break-inside: avoid; }
   }
 
-  @media (max-width: 768px) {
-    .main { grid-template-columns: 1fr; }
-    .sidebar { display: none; }
-    .track { grid-template-columns: 1fr; }
-    .track-head { border-right: none; border-bottom: 1px solid var(--border); }
-    .header-stats { display: none; }
-    .track-body { grid-template-columns: 1fr; }
+  /* ═══════════════════════════════════════
+     RESPONSIVE — TABLET (≤1024px)
+  ═══════════════════════════════════════ */
+  @media (max-width: 1024px) {
+    :root { --sidebar-w: 200px; }
+    .track { grid-template-columns: 160px 1fr; }
+    .track-head { padding: 1.25rem 1rem; }
+    .header-stats .stat-cell:last-child { display: none; }
   }
+
+  /* ═══════════════════════════════════════
+     RESPONSIVE — MOBILE (≤768px)
+  ═══════════════════════════════════════ */
+  @media (max-width: 768px) {
+    .wrapper { grid-template-columns: 1fr; }
+
+    /* sidebar becomes an off-canvas drawer */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 260px;
+      height: 100vh;
+      background: var(--paper);
+      z-index: 999;
+      box-shadow: 4px 0 24px rgba(0,0,0,0.15);
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+      border-right: 2px solid var(--ink);
+      padding-top: 1rem;
+      overflow-y: auto;
+    }
+
+    .sidebar.open { transform: translateX(0); }
+
+    .sidebar-close {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 0 1.1rem 0.75rem;
+    }
+
+    .sidebar-close-btn {
+      background: none;
+      border: none;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      cursor: pointer;
+      letter-spacing: 0.08em;
+    }
+
+    .sidebar-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      z-index: 998;
+    }
+
+    .sidebar-overlay.show { display: block; }
+
+    .mobile-nav-btn { display: flex; }
+
+    /* tracks go single column */
+    .track { grid-template-columns: 1fr; }
+
+    .track-head {
+      border-right: none;
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 1.1rem;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      grid-template-rows: auto auto;
+      gap: 0 10px;
+      align-items: center;
+    }
+
+    .track-num {
+      font-size: 2rem;
+      grid-row: 1 / 3;
+      opacity: 0.08;
+    }
+
+    .track-name { font-size: 1rem; grid-column: 2; }
+    .track-weeks { grid-column: 2; }
+    .track-tag { grid-column: 3; grid-row: 1; }
+    .week-pills { grid-column: 2 / 4; margin-top: 6px; }
+
+    .track-body {
+      padding: 1rem;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.6rem;
+    }
+
+    /* header simplified */
+    .header-stats { display: none; }
+    .course-sub { display: none; }
+    .logo-block { min-width: 130px; }
+    .header-meta { padding: 0.9rem 1rem; }
+    .course-title { font-size: 1rem; }
+    .faculty-strip { padding: 0.6rem 1rem; gap: 1rem; }
+  }
+
+  /* ═══════════════════════════════════════
+     RESPONSIVE — SMALL MOBILE (≤480px)
+  ═══════════════════════════════════════ */
+  @media (max-width: 480px) {
+    .track-body { grid-template-columns: 1fr; }
+    .logo-block { padding: 0.9rem 1rem; }
+    .logo-block .brand { font-size: 1.2rem; }
+    footer { flex-direction: column; text-align: center; gap: 0.5rem; }
+  }
+
+  /* ═══════════════════════════════════════
+     ANIMATION
+  ═══════════════════════════════════════ */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .track { animation: fadeUp 0.4s ease both; }
+  .t1 { animation-delay: 0.05s; }
+  .t2 { animation-delay: 0.10s; }
+  .t3 { animation-delay: 0.15s; }
+  .t4 { animation-delay: 0.20s; }
+  .t5 { animation-delay: 0.25s; }
+  .t6 { animation-delay: 0.30s; }
+  .t7 { animation-delay: 0.35s; }
 </style>
 </head>
 <body>
+
+<!-- sidebar overlay for mobile -->
+<div class="sidebar-overlay" id="overlay"></div>
+
+<!-- floating nav button for mobile -->
+<button class="mobile-nav-btn" id="navToggle" aria-label="Open navigation">☰</button>
 
 <header>
   <div class="header-top">
@@ -456,7 +722,7 @@
     <div class="header-stats">
       <div class="stat-cell"><div class="num">7</div><div class="lbl">Tracks</div></div>
       <div class="stat-cell"><div class="num">35+</div><div class="lbl">Modules</div></div>
-      <div class="stat-cell"><div class="num">40</div><div class="lbl">Weeks</div></div>
+      <div class="stat-cell"><div class="num">34</div><div class="lbl">Weeks</div></div>
     </div>
   </div>
   <div class="faculty-strip">
@@ -480,34 +746,52 @@
   </div>
 </header>
 
-<div class="main">
+<div class="wrapper">
 
   <!-- SIDEBAR -->
-  <aside class="sidebar">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-close">
+      <button class="sidebar-close-btn" id="sidebarClose">✕ close</button>
+    </div>
+
+    <div class="sidebar-section search-wrap">
+      <div class="sidebar-title">Search Topics</div>
+      <input class="search-input" id="searchInput" type="text" placeholder="e.g. pandas, joins, CNN…">
+    </div>
+
     <div class="sidebar-section">
       <div class="sidebar-title">Tracks</div>
-      <nav class="track-nav">
-        <a href="#python"><div class="track-dot" style="background:#1a3a5c;"></div>Python</a>
-        <a href="#excel"><div class="track-dot" style="background:#c8952a;"></div>Advanced Excel</a>
-        <a href="#sql"><div class="track-dot" style="background:#2d7a4f;"></div>SQL</a>
-        <a href="#powerbi"><div class="track-dot" style="background:#8b2fc9;"></div>Power BI</a>
-        <a href="#stats"><div class="track-dot" style="background:#e84a2f;"></div>Statistics</a>
-        <a href="#ml"><div class="track-dot" style="background:#1a3a5c;"></div>Machine Learning</a>
-        <a href="#dl"><div class="track-dot" style="background:#c8952a;"></div>Deep Learning</a>
+      <nav class="track-nav" id="trackNav">
+        <a href="#python" data-track="t1"><div class="track-dot" style="background:#1a3a5c;"></div>Python</a>
+        <a href="#excel"  data-track="t2"><div class="track-dot" style="background:#c8952a;"></div>Advanced Excel</a>
+        <a href="#sql"    data-track="t3"><div class="track-dot" style="background:#2d7a4f;"></div>SQL</a>
+        <a href="#powerbi" data-track="t4"><div class="track-dot" style="background:#8b2fc9;"></div>Power BI</a>
+        <a href="#stats"  data-track="t5"><div class="track-dot" style="background:#e84a2f;"></div>Statistics</a>
+        <a href="#ml"     data-track="t6"><div class="track-dot" style="background:#1a3a5c;"></div>Machine Learning</a>
+        <a href="#dl"     data-track="t7"><div class="track-dot" style="background:#c8952a;"></div>Deep Learning</a>
       </nav>
     </div>
+
     <div class="sidebar-section">
       <div class="sidebar-title">Course Info</div>
-      <div class="info-row"><span>Duration</span><strong>~40 weeks</strong></div>
+      <div class="info-row"><span>Duration</span><strong>~34 weeks</strong></div>
       <div class="info-row"><span>Level</span><strong>0 → Expert</strong></div>
       <div class="info-row"><span>Mode</span><strong>Offline / Online</strong></div>
       <div class="info-row"><span>Projects</span><strong>7 Capstone</strong></div>
       <div class="info-row"><span>Tools</span><strong>Python, SQL, PBI</strong></div>
       <div class="badge-cert">Certificate Course</div>
     </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-title">Timeline</div>
+      <div class="progress-wrap" id="progressWrap">
+        <!-- dynamically populated -->
+      </div>
+    </div>
+
     <div class="sidebar-section">
       <div class="sidebar-title">Contact</div>
-      <div class="info-row" style="flex-direction:column;gap:2px;">
+      <div class="info-row" style="flex-direction:column;gap:3px;">
         <span style="color:var(--muted);">SachiTech Institute</span>
         <strong style="font-size:0.65rem;">www.sachitech.in</strong>
       </div>
@@ -515,7 +799,7 @@
   </aside>
 
   <!-- CONTENT -->
-  <main class="content">
+  <main class="content" id="mainContent">
 
     <!-- TRACK 1: PYTHON -->
     <section class="track t1" id="python">
@@ -524,24 +808,25 @@
         <div class="track-name">Python Programming</div>
         <div class="track-weeks">5 weeks</div>
         <div class="track-tag">Beginner</div>
+        <div class="week-pills" data-weeks="5" data-total="40"></div>
       </div>
       <div class="track-body">
         <div class="module-card">
-          <div class="mod-title">Introduction & Setup</div>
+          <div class="mod-title">Introduction &amp; Setup</div>
           <ul class="mod-topics">
-            <li>What is Python & its features</li>
+            <li>What is Python &amp; its features</li>
             <li>Installing Python, Jupyter Notebook</li>
             <li>Google Colab setup</li>
             <li>Running .py scripts</li>
           </ul>
         </div>
         <div class="module-card">
-          <div class="mod-title">Syntax, Data Types & Operators</div>
+          <div class="mod-title">Syntax, Data Types &amp; Operators</div>
           <ul class="mod-topics">
             <li>Variables, int, float, str, bool, None</li>
-            <li>Type conversion (implicit & explicit)</li>
+            <li>Type conversion (implicit &amp; explicit)</li>
             <li>Arithmetic, comparison, logical operators</li>
-            <li>Membership & identity operators</li>
+            <li>Membership &amp; identity operators</li>
           </ul>
         </div>
         <div class="module-card">
@@ -554,11 +839,11 @@
           </ul>
         </div>
         <div class="module-card">
-          <div class="mod-title">Control Flow & Functions</div>
+          <div class="mod-title">Control Flow &amp; Functions</div>
           <ul class="mod-topics">
             <li>if / elif / else conditionals</li>
-            <li>for & while loops, break, continue</li>
-            <li>def, arguments, default & keyword args</li>
+            <li>for &amp; while loops, break, continue</li>
+            <li>def, arguments, default &amp; keyword args</li>
             <li>Lambda functions, return values</li>
           </ul>
         </div>
@@ -572,6 +857,7 @@
         <div class="track-name">Advanced Excel</div>
         <div class="track-weeks">4 weeks</div>
         <div class="track-tag">Intermediate</div>
+        <div class="week-pills" data-weeks="4" data-total="40"></div>
       </div>
       <div class="track-body">
         <div class="module-card">
@@ -584,21 +870,21 @@
           </ul>
         </div>
         <div class="module-card">
-          <div class="mod-title">Pivot Tables & Power Query</div>
+          <div class="mod-title">Pivot Tables &amp; Power Query</div>
           <ul class="mod-topics">
             <li>Pivot tables, slicers, calculated fields</li>
             <li>Power Query — ETL workflows</li>
-            <li>Power Pivot & data modeling</li>
+            <li>Power Pivot &amp; data modeling</li>
             <li>DAX basics</li>
           </ul>
         </div>
         <div class="module-card">
-          <div class="mod-title">Dashboards & Macros</div>
+          <div class="mod-title">Dashboards &amp; Macros</div>
           <ul class="mod-topics">
             <li>Chart types, conditional formatting</li>
             <li>Dynamic dashboards with slicers</li>
             <li>VBA macro basics</li>
-            <li>Data validation & protection</li>
+            <li>Data validation &amp; protection</li>
           </ul>
         </div>
       </div>
@@ -611,6 +897,7 @@
         <div class="track-name">SQL</div>
         <div class="track-weeks">4 weeks</div>
         <div class="track-tag">Intermediate</div>
+        <div class="week-pills" data-weeks="4" data-total="40"></div>
       </div>
       <div class="track-body">
         <div class="module-card">
@@ -619,11 +906,11 @@
             <li>SELECT, WHERE, GROUP BY, ORDER BY</li>
             <li>HAVING, DISTINCT, LIMIT</li>
             <li>Aggregate: COUNT, SUM, AVG, MIN, MAX</li>
-            <li>Filtering & sorting data</li>
+            <li>Filtering &amp; sorting data</li>
           </ul>
         </div>
         <div class="module-card">
-          <div class="mod-title">Joins, Subqueries & CTEs</div>
+          <div class="mod-title">Joins, Subqueries &amp; CTEs</div>
           <ul class="mod-topics">
             <li>INNER, LEFT, RIGHT, FULL joins</li>
             <li>Nested subqueries</li>
@@ -636,8 +923,8 @@
           <ul class="mod-topics">
             <li>ROW_NUMBER, RANK, DENSE_RANK</li>
             <li>LEAD, LAG, PARTITION BY</li>
-            <li>Running totals & moving averages</li>
-            <li>Query performance & indexing</li>
+            <li>Running totals &amp; moving averages</li>
+            <li>Query performance &amp; indexing</li>
           </ul>
         </div>
       </div>
@@ -650,28 +937,29 @@
         <div class="track-name">Power BI</div>
         <div class="track-weeks">4 weeks</div>
         <div class="track-tag">Intermediate</div>
+        <div class="week-pills" data-weeks="4" data-total="40"></div>
       </div>
       <div class="track-body">
         <div class="module-card">
-          <div class="mod-title">Data Ingestion & Power Query</div>
+          <div class="mod-title">Data Ingestion &amp; Power Query</div>
           <ul class="mod-topics">
             <li>Connecting to Excel, SQL, CSV sources</li>
             <li>Transforming data with Power Query</li>
             <li>M language basics</li>
-            <li>Append & merge queries</li>
+            <li>Append &amp; merge queries</li>
           </ul>
         </div>
         <div class="module-card">
-          <div class="mod-title">DAX & Data Modeling</div>
+          <div class="mod-title">DAX &amp; Data Modeling</div>
           <ul class="mod-topics">
-            <li>Calculated columns & measures</li>
+            <li>Calculated columns &amp; measures</li>
             <li>CALCULATE, FILTER, ALL, SUMX</li>
-            <li>Table relationships & star schema</li>
+            <li>Table relationships &amp; star schema</li>
             <li>Time intelligence functions</li>
           </ul>
         </div>
         <div class="module-card">
-          <div class="mod-title">Dashboards & Publishing</div>
+          <div class="mod-title">Dashboards &amp; Publishing</div>
           <ul class="mod-topics">
             <li>Chart types, maps, KPI visuals</li>
             <li>Drill-through, bookmarks, tooltips</li>
@@ -689,6 +977,7 @@
         <div class="track-name">Statistics</div>
         <div class="track-weeks">5 weeks</div>
         <div class="track-tag">Core Theory</div>
+        <div class="week-pills" data-weeks="5" data-total="40"></div>
       </div>
       <div class="track-body">
         <div class="module-card">
@@ -696,12 +985,12 @@
           <ul class="mod-topics">
             <li>Mean, median, mode</li>
             <li>Variance, std deviation</li>
-            <li>Skewness & kurtosis</li>
-            <li>Percentiles & IQR</li>
+            <li>Skewness &amp; kurtosis</li>
+            <li>Percentiles &amp; IQR</li>
           </ul>
         </div>
         <div class="module-card">
-          <div class="mod-title">Probability & Distributions</div>
+          <div class="mod-title">Probability &amp; Distributions</div>
           <ul class="mod-topics">
             <li>Bayes theorem</li>
             <li>Normal, binomial, Poisson</li>
@@ -715,14 +1004,14 @@
             <li>Hypothesis testing, p-value</li>
             <li>t-test, z-test, chi-square</li>
             <li>ANOVA</li>
-            <li>Type I & Type II errors</li>
+            <li>Type I &amp; Type II errors</li>
           </ul>
         </div>
         <div class="module-card">
-          <div class="mod-title">Correlation & Regression</div>
+          <div class="mod-title">Correlation &amp; Regression</div>
           <ul class="mod-topics">
-            <li>Pearson & Spearman correlation</li>
-            <li>Simple & multiple regression</li>
+            <li>Pearson &amp; Spearman correlation</li>
+            <li>Simple &amp; multiple regression</li>
             <li>R², RMSE, MAE</li>
             <li>Multicollinearity</li>
           </ul>
@@ -737,13 +1026,14 @@
         <div class="track-name">Machine Learning</div>
         <div class="track-weeks">8 weeks</div>
         <div class="track-tag">Advanced</div>
+        <div class="week-pills" data-weeks="8" data-total="40"></div>
       </div>
       <div class="track-body">
         <div class="module-card">
           <div class="mod-title">Data Preprocessing</div>
           <ul class="mod-topics">
             <li>Handling missing values (mean/median/mode)</li>
-            <li>One-hot & label encoding</li>
+            <li>One-hot &amp; label encoding</li>
             <li>Normalization vs standardization</li>
             <li>Outlier handling: Z-score, IQR</li>
           </ul>
@@ -751,9 +1041,9 @@
         <div class="module-card">
           <div class="mod-title">Supervised — Regression</div>
           <ul class="mod-topics">
-            <li>Linear & multiple regression</li>
+            <li>Linear &amp; multiple regression</li>
             <li>Polynomial regression</li>
-            <li>Ridge & Lasso regression</li>
+            <li>Ridge &amp; Lasso regression</li>
             <li>Metrics: RMSE, MAE, R²</li>
           </ul>
         </div>
@@ -776,7 +1066,7 @@
           </ul>
         </div>
         <div class="module-card">
-          <div class="mod-title">Model Evaluation & Tuning</div>
+          <div class="mod-title">Model Evaluation &amp; Tuning</div>
           <ul class="mod-topics">
             <li>Train-test split, k-fold CV</li>
             <li>Overfitting vs underfitting</li>
@@ -787,76 +1077,60 @@
         <div class="module-card">
           <div class="mod-title">Visualization for ML</div>
           <ul class="mod-topics">
-            <li>Matplotlib & Seaborn</li>
+            <li>Matplotlib &amp; Seaborn</li>
             <li>Histograms, box plots, scatter</li>
-            <li>Heatmaps & correlation matrix</li>
+            <li>Heatmaps &amp; correlation matrix</li>
             <li>Confusion matrix plots</li>
           </ul>
         </div>
       </div>
     </section>
 
-    <!-- TRACK 7: DEEP LEARNING -->
+    <!-- TRACK 7: DEEP LEARNING (Theory Only) -->
     <section class="track t7" id="dl">
       <div class="track-head">
         <div class="track-num">07</div>
         <div class="track-name">Deep Learning</div>
-        <div class="track-weeks">10 weeks</div>
-        <div class="track-tag">Expert</div>
+        <div class="track-weeks">4 weeks</div>
+        <div class="track-tag">Theory Only</div>
+        <div class="week-pills" data-weeks="4" data-total="40"></div>
+        <div style="font-size:0.58rem;color:var(--muted);margin-top:4px;font-style:italic;">Conceptual overview — not part of DA practical scope</div>
       </div>
       <div class="track-body">
         <div class="module-card">
-          <div class="mod-title">Neural Network Fundamentals</div>
+          <div class="mod-title">What is Deep Learning?</div>
           <ul class="mod-topics">
-            <li>Perceptron, activation functions</li>
-            <li>Forward & backpropagation</li>
-            <li>Gradient descent & optimizers</li>
-            <li>Loss functions</li>
+            <li>Difference: ML vs Deep Learning</li>
+            <li>When &amp; why deep learning is used</li>
+            <li>Overview of neural networks</li>
+            <li>Real-world applications</li>
           </ul>
         </div>
         <div class="module-card">
-          <div class="mod-title">TensorFlow & Keras</div>
+          <div class="mod-title">Neural Network Concepts</div>
           <ul class="mod-topics">
-            <li>Building sequential models</li>
-            <li>Compiling, training & saving</li>
-            <li>Callbacks, early stopping</li>
-            <li>Batch normalization, dropout</li>
+            <li>Perceptron &amp; layers (input, hidden, output)</li>
+            <li>Activation functions (ReLU, Sigmoid, Softmax)</li>
+            <li>Forward pass &amp; backpropagation — concept</li>
+            <li>Loss functions &amp; gradient descent — idea</li>
           </ul>
         </div>
         <div class="module-card">
-          <div class="mod-title">CNNs — Computer Vision</div>
+          <div class="mod-title">Key Architectures — Overview</div>
           <ul class="mod-topics">
-            <li>Convolution & pooling layers</li>
-            <li>Image classification</li>
-            <li>Transfer learning: ResNet, VGG</li>
-            <li>Data augmentation</li>
+            <li>CNNs — what they do &amp; use cases</li>
+            <li>RNNs / LSTMs — sequential data concept</li>
+            <li>Transformers &amp; attention — high-level idea</li>
+            <li>BERT, GPT — what they are (no coding)</li>
           </ul>
         </div>
         <div class="module-card">
-          <div class="mod-title">RNNs & LSTMs</div>
+          <div class="mod-title">DL in the Data Analyst Context</div>
           <ul class="mod-topics">
-            <li>Sequential data & time series</li>
-            <li>Vanishing gradient problem</li>
-            <li>LSTM & GRU architectures</li>
-            <li>Text generation basics</li>
-          </ul>
-        </div>
-        <div class="module-card">
-          <div class="mod-title">NLP Fundamentals</div>
-          <ul class="mod-topics">
-            <li>Tokenization, stopwords, stemming</li>
-            <li>Word embeddings: Word2Vec, GloVe</li>
-            <li>Sentiment analysis</li>
-            <li>Text classification</li>
-          </ul>
-        </div>
-        <div class="module-card">
-          <div class="mod-title">Transformers & Attention</div>
-          <ul class="mod-topics">
-            <li>Self-attention mechanism</li>
-            <li>BERT, GPT architecture</li>
-            <li>Fine-tuning pretrained models</li>
-            <li>Hugging Face basics</li>
+            <li>How analysts interact with DL models</li>
+            <li>Pre-trained models &amp; APIs (no training)</li>
+            <li>Understanding model outputs &amp; metrics</li>
+            <li>When to escalate to a Data Scientist</li>
           </ul>
         </div>
       </div>
@@ -873,5 +1147,134 @@
   <div class="f-copy">© 2025 SachiTech. All rights reserved. · Data Analysis Complete Syllabus</div>
 </footer>
 
+<script>
+  /* ── WEEK PILLS ── */
+  document.querySelectorAll('.week-pills').forEach(el => {
+    const w = parseInt(el.dataset.weeks);
+    const t = parseInt(el.dataset.total);
+    const cols = Math.min(t, 20);
+    for (let i = 0; i < cols; i++) {
+      const pill = document.createElement('div');
+      pill.className = 'week-pill' + (i < Math.round(w / t * cols) ? ' filled' : '');
+      el.appendChild(pill);
+    }
+  });
+
+  /* ── SIDEBAR PROGRESS ── */
+  const tracks = [
+    { name: 'Python', weeks: 5, cls: '#1a3a5c' },
+    { name: 'Excel',  weeks: 4, cls: '#c8952a' },
+    { name: 'SQL',    weeks: 4, cls: '#2d7a4f' },
+    { name: 'Power BI', weeks: 4, cls: '#8b2fc9' },
+    { name: 'Stats',  weeks: 5, cls: '#e84a2f' },
+    { name: 'ML',     weeks: 8, cls: '#1a3a5c' },
+    { name: 'DL',     weeks: 4, cls: '#c8952a' },
+  ];
+  const total = tracks.reduce((s, t) => s + t.weeks, 0);
+  const pw = document.getElementById('progressWrap');
+  tracks.forEach(t => {
+    const pct = Math.round(t.weeks / total * 100);
+    pw.innerHTML += `
+      <div class="progress-label"><span>${t.name}</span><span>${t.weeks}w</span></div>
+      <div class="progress-bar">
+        <div class="progress-fill" style="width:${pct}%;background:${t.cls};"></div>
+      </div>`;
+  });
+
+  /* ── MOBILE SIDEBAR TOGGLE ── */
+  const sidebar  = document.getElementById('sidebar');
+  const overlay  = document.getElementById('overlay');
+  const navBtn   = document.getElementById('navToggle');
+  const closeBtn = document.getElementById('sidebarClose');
+
+  function openSidebar()  { sidebar.classList.add('open'); overlay.classList.add('show'); }
+  function closeSidebar() { sidebar.classList.remove('open'); overlay.classList.remove('show'); }
+
+  navBtn.addEventListener('click', openSidebar);
+  closeBtn.addEventListener('click', closeSidebar);
+  overlay.addEventListener('click', closeSidebar);
+
+  /* close sidebar on nav link click (mobile) */
+  document.querySelectorAll('.track-nav a').forEach(a => {
+    a.addEventListener('click', () => {
+      if (window.innerWidth <= 768) closeSidebar();
+    });
+  });
+
+  /* ── ACTIVE NAV HIGHLIGHT on scroll ── */
+  const sections = document.querySelectorAll('.track[id]');
+  const navLinks = document.querySelectorAll('.track-nav a');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(a => {
+          a.classList.toggle('active', a.getAttribute('href') === '#' + entry.target.id);
+        });
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+
+  /* ── SEARCH / FILTER ── */
+  const searchInput = document.getElementById('searchInput');
+
+  searchInput.addEventListener('input', () => {
+    const q = searchInput.value.trim().toLowerCase();
+
+    // clear previous highlights
+    document.querySelectorAll('mark').forEach(m => {
+      m.replaceWith(m.textContent);
+    });
+
+    sections.forEach(section => {
+      if (!q) {
+        section.classList.remove('hidden');
+        section.querySelectorAll('.module-card').forEach(c => c.classList.remove('hidden'));
+        return;
+      }
+
+      const cards = section.querySelectorAll('.module-card');
+      let sectionMatch = false;
+
+      cards.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        if (text.includes(q)) {
+          card.classList.remove('hidden');
+          sectionMatch = true;
+          // highlight
+          highlightText(card, q);
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+
+      section.classList.toggle('hidden', !sectionMatch);
+    });
+  });
+
+  function highlightText(el, q) {
+    el.querySelectorAll('li, .mod-title').forEach(node => {
+      node.childNodes.forEach(child => {
+        if (child.nodeType === 3) {
+          const idx = child.textContent.toLowerCase().indexOf(q);
+          if (idx !== -1) {
+            const span = document.createElement('span');
+            span.innerHTML =
+              escHtml(child.textContent.slice(0, idx)) +
+              '<mark>' + escHtml(child.textContent.slice(idx, idx + q.length)) + '</mark>' +
+              escHtml(child.textContent.slice(idx + q.length));
+            child.replaceWith(span);
+          }
+        }
+      });
+    });
+  }
+
+  function escHtml(s) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+</script>
 </body>
 </html>
