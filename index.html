@@ -3,153 +3,134 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SachiTech — Data Analysis Syllabus</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<title>SachiTech — Data Analyst Syllabus</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ink: #0b0c10;
-    --paper: #f7f4ef;
-    --accent: #e84a2f;
-    --gold: #c8952a;
-    --muted: #6b6560;
-    --border: #ddd9d1;
-    --blue: #1a3a5c;
-    --green: #2d7a4f;
-    --purple: #8b2fc9;
-    --card-bg: #ffffff;
-    --sidebar-w: 240px;
+    --navy:   #0b1f3a;
+    --blue:   #1a4b8c;
+    --mid:    #2563b0;
+    --light:  #e8f0fb;
+    --pale:   #f3f7fd;
+    --white:  #ffffff;
+    --border: #c5d8f0;
+    --muted:  #5a7fa8;
+    --accent: #1e90ff;
+    --gold:   #e9a825;
+    --text:   #0b1f3a;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   html { scroll-behavior: smooth; }
 
   body {
-    background: var(--paper);
-    color: var(--ink);
-    font-family: 'DM Mono', monospace;
+    background: var(--pale);
+    color: var(--text);
+    font-family: 'IBM Plex Mono', monospace;
     min-height: 100vh;
     overflow-x: hidden;
   }
 
-  /* ═══════════════════════════════════════
-     MOBILE NAV TOGGLE
-  ═══════════════════════════════════════ */
-  .mobile-nav-btn {
-    display: none;
-    position: fixed;
-    bottom: 1.5rem;
-    right: 1.5rem;
-    z-index: 1000;
-    width: 52px;
-    height: 52px;
-    border-radius: 50%;
-    background: var(--ink);
-    color: white;
-    border: none;
-    cursor: pointer;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-    font-size: 1.2rem;
-    transition: transform 0.2s, background 0.2s;
-  }
-  .mobile-nav-btn:hover { background: var(--accent); transform: scale(1.05); }
-
-  /* ═══════════════════════════════════════
+  /* ════════════════════════════
      HEADER
-  ═══════════════════════════════════════ */
+  ════════════════════════════ */
   header {
-    border-bottom: 2px solid var(--ink);
+    background: var(--navy);
+    color: var(--white);
+    border-bottom: 3px solid var(--accent);
     position: sticky;
     top: 0;
-    z-index: 100;
-    background: var(--paper);
+    z-index: 200;
   }
 
-  .header-top {
+  .header-inner {
     display: flex;
     align-items: stretch;
   }
 
-  .logo-block {
-    background: var(--ink);
-    color: var(--paper);
-    padding: 1.1rem 1.75rem;
+  /* logo */
+  .logo-col {
+    background: var(--blue);
+    padding: 1.1rem 1.8rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    min-width: 180px;
+    border-right: 1px solid rgba(255,255,255,0.1);
     flex-shrink: 0;
   }
 
-  .logo-block .brand {
+  .brand {
     font-family: 'Syne', sans-serif;
     font-weight: 800;
-    font-size: 1.5rem;
+    font-size: 1.55rem;
     letter-spacing: -0.02em;
     line-height: 1;
+    color: var(--white);
   }
+  .brand span { color: var(--accent); }
 
-  .logo-block .brand span { color: var(--accent); }
-
-  .logo-block .tagline {
-    font-size: 0.58rem;
-    letter-spacing: 0.16em;
-    color: #999;
-    margin-top: 5px;
+  .tagline {
+    font-size: 0.56rem;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    margin-top: 5px;
   }
 
-  .header-meta {
-    padding: 1rem 1.75rem;
+  /* title */
+  .title-col {
+    padding: 1.1rem 1.8rem;
+    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    border-left: 1px solid var(--border);
-    flex: 1;
-    min-width: 0;
+    border-right: 1px solid rgba(255,255,255,0.08);
   }
 
-  .course-title {
+  .course-name {
     font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: clamp(1.1rem, 2.5vw, 1.7rem);
-    letter-spacing: -0.03em;
+    font-weight: 800;
+    font-size: clamp(1rem, 2.5vw, 1.65rem);
+    letter-spacing: -0.02em;
     line-height: 1.1;
-    color: var(--ink);
+    color: var(--white);
   }
+  .course-name span { color: var(--accent); }
 
-  .course-title span { color: var(--accent); }
-
-  .course-sub {
-    font-size: 0.62rem;
-    letter-spacing: 0.1em;
-    color: var(--muted);
-    margin-top: 5px;
-    text-transform: uppercase;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .header-stats {
+  .course-tags {
     display: flex;
-    border-left: 1px solid var(--border);
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 7px;
+  }
+
+  .ctag {
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.55);
+    border-radius: 2px;
+  }
+
+  /* stats */
+  .stats-col {
+    display: flex;
     flex-shrink: 0;
   }
 
-  .stat-cell {
-    padding: 1rem 1.25rem;
-    border-left: 1px solid var(--border);
+  .stat-box {
+    padding: 1rem 1.3rem;
+    border-left: 1px solid rgba(255,255,255,0.08);
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: center;
-    text-align: center;
     min-width: 78px;
   }
 
-  .stat-cell .num {
+  .stat-num {
     font-family: 'Syne', sans-serif;
     font-weight: 800;
     font-size: 1.5rem;
@@ -157,42 +138,37 @@
     line-height: 1;
   }
 
-  .stat-cell .lbl {
-    font-size: 0.56rem;
+  .stat-lbl {
+    font-size: 0.54rem;
     letter-spacing: 0.12em;
-    color: var(--muted);
     text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
     margin-top: 3px;
   }
 
   /* faculty strip */
   .faculty-strip {
+    background: rgba(255,255,255,0.04);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 0.6rem 1.8rem;
     display: flex;
     align-items: center;
-    padding: 0.65rem 1.75rem;
     gap: 1.5rem;
-    background: var(--ink);
-    color: var(--paper);
-    border-top: 1px solid #222;
     overflow-x: auto;
   }
 
-  .faculty-label {
-    font-size: 0.58rem;
+  .fac-label {
+    font-size: 0.55rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: #777;
+    color: rgba(255,255,255,0.3);
     white-space: nowrap;
     flex-shrink: 0;
   }
 
-  .faculty-list {
-    display: flex;
-    gap: 1.5rem;
-    flex-wrap: nowrap;
-  }
+  .fac-list { display: flex; gap: 1.5rem; }
 
-  .faculty-item {
+  .fac-item {
     display: flex;
     align-items: center;
     gap: 9px;
@@ -200,89 +176,78 @@
   }
 
   .avatar {
-    width: 28px;
-    height: 28px;
+    width: 30px; height: 30px;
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex; align-items: center; justify-content: center;
     font-family: 'Syne', sans-serif;
     font-weight: 700;
     font-size: 0.6rem;
     flex-shrink: 0;
+    border: 1.5px solid rgba(255,255,255,0.2);
   }
-
-  .av-red { background: var(--accent); color: white; }
+  .av-blue { background: var(--mid); color: white; }
   .av-gold { background: var(--gold); color: white; }
 
-  .faculty-info .name {
-    font-family: 'Syne', sans-serif;
-    font-weight: 600;
-    font-size: 0.75rem;
-    color: var(--paper);
-  }
+  .fac-name { font-family: 'Syne', sans-serif; font-size: 0.75rem; color: var(--white); font-weight: 600; }
+  .fac-role { font-size: 0.55rem; color: rgba(255,255,255,0.4); letter-spacing: 0.06em; }
 
-  .faculty-info .role {
-    font-size: 0.56rem;
-    color: #888;
-    letter-spacing: 0.06em;
-  }
-
-  /* ═══════════════════════════════════════
+  /* ════════════════════════════
      LAYOUT
-  ═══════════════════════════════════════ */
+  ════════════════════════════ */
   .wrapper {
     display: grid;
-    grid-template-columns: var(--sidebar-w) 1fr;
-    min-height: calc(100vh - 100px);
+    grid-template-columns: 230px 1fr;
+    min-height: calc(100vh - 110px);
   }
 
-  /* ═══════════════════════════════════════
+  /* ════════════════════════════
      SIDEBAR
-  ═══════════════════════════════════════ */
+  ════════════════════════════ */
   .sidebar {
+    background: var(--navy);
+    color: var(--white);
     border-right: 1px solid var(--border);
     padding: 1.5rem 0;
     position: sticky;
-    top: 100px;
+    top: 110px;
     height: fit-content;
-    max-height: calc(100vh - 100px);
+    max-height: calc(100vh - 110px);
     overflow-y: auto;
   }
 
-  .sidebar-section {
-    padding: 0 1.1rem 1.1rem;
-    border-bottom: 1px solid var(--border);
+  .sb-section {
+    padding: 0 1.2rem 1.2rem;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
     margin-bottom: 1rem;
   }
 
-  .sidebar-title {
-    font-size: 0.58rem;
-    letter-spacing: 0.15em;
+  .sb-title {
+    font-size: 0.56rem;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 0.65rem;
+    color: rgba(255,255,255,0.3);
+    margin-bottom: 0.7rem;
   }
 
-  .track-nav a {
+  .sb-nav a {
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 5px 7px;
-    border-radius: 4px;
-    font-size: 0.68rem;
-    color: var(--muted);
+    padding: 5px 8px;
+    font-size: 0.67rem;
+    color: rgba(255,255,255,0.55);
     text-decoration: none;
+    border-radius: 3px;
     transition: all 0.15s;
     margin-bottom: 1px;
   }
+  .sb-nav a:hover, .sb-nav a.active {
+    background: var(--mid);
+    color: var(--white);
+  }
 
-  .track-nav a:hover,
-  .track-nav a.active { background: var(--ink); color: white; }
-
-  .track-dot {
-    width: 7px;
-    height: 7px;
+  .dot {
+    width: 7px; height: 7px;
     border-radius: 50%;
     flex-shrink: 0;
   }
@@ -290,166 +255,206 @@
   .info-row {
     display: flex;
     justify-content: space-between;
-    font-size: 0.64rem;
+    font-size: 0.63rem;
     padding: 4px 0;
-    border-bottom: 1px dashed var(--border);
-    color: var(--muted);
+    border-bottom: 1px dashed rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.4);
   }
   .info-row:last-of-type { border-bottom: none; }
-  .info-row strong { color: var(--ink); }
+  .info-row strong { color: rgba(255,255,255,0.85); }
 
-  .badge-cert {
+  .badge {
+    display: inline-block;
     background: var(--accent);
     color: white;
-    font-size: 0.56rem;
+    font-size: 0.55rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     padding: 4px 10px;
-    display: inline-block;
     margin-top: 8px;
   }
 
-  /* progress bar */
-  .progress-wrap {
-    margin-top: 0.75rem;
-  }
-
-  .progress-label {
+  /* role pills */
+  .role-pill {
     display: flex;
-    justify-content: space-between;
-    font-size: 0.6rem;
-    color: var(--muted);
-    margin-bottom: 4px;
+    align-items: flex-start;
+    gap: 7px;
+    padding: 5px 0;
+    font-size: 0.63rem;
+    color: rgba(255,255,255,0.6);
+    border-bottom: 1px dashed rgba(255,255,255,0.08);
+    line-height: 1.4;
   }
+  .role-pill:last-child { border-bottom: none; }
+  .role-icon { color: var(--accent); flex-shrink: 0; margin-top: 1px; }
 
-  .progress-bar {
-    height: 4px;
-    background: var(--border);
-    border-radius: 2px;
-    overflow: hidden;
-    margin-bottom: 6px;
+  /* search */
+  .sb-search {
+    width: 100%;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: white;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.63rem;
+    padding: 6px 10px;
+    outline: none;
+    transition: border-color 0.15s;
   }
+  .sb-search:focus { border-color: var(--accent); }
+  .sb-search::placeholder { color: rgba(255,255,255,0.25); }
 
-  .progress-fill {
-    height: 100%;
-    border-radius: 2px;
-    transition: width 0.6s ease;
-  }
-
-  /* ═══════════════════════════════════════
+  /* ════════════════════════════
      CONTENT
-  ═══════════════════════════════════════ */
-  .content { padding: 0; }
+  ════════════════════════════ */
+  .content { background: var(--pale); }
 
-  /* track */
-  .track {
+  /* ── INTRO BANNER ── */
+  .intro-banner {
+    background: var(--blue);
+    color: white;
+    padding: 1.5rem 2rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1rem;
+    align-items: center;
+    border-bottom: 2px solid var(--accent);
+  }
+
+  .intro-heading {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+  .intro-heading span { color: var(--accent); }
+
+  .intro-desc {
+    font-size: 0.67rem;
+    color: rgba(255,255,255,0.65);
+    margin-top: 6px;
+    line-height: 1.6;
+    max-width: 500px;
+  }
+
+  .intro-badge {
+    background: var(--accent);
+    color: white;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.7rem;
+    padding: 8px 16px;
+    text-align: center;
+    white-space: nowrap;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* ── TOPIC SECTION ── */
+  .topic-section {
     border-bottom: 1px solid var(--border);
     display: grid;
-    grid-template-columns: 190px 1fr;
-    transition: background 0.2s;
+    grid-template-columns: 200px 1fr;
+    animation: fadeUp 0.4s ease both;
   }
 
-  .track:target { scroll-margin-top: 110px; }
+  .topic-section:nth-child(1) { animation-delay: 0.05s; }
+  .topic-section:nth-child(2) { animation-delay: 0.10s; }
+  .topic-section:nth-child(3) { animation-delay: 0.15s; }
+  .topic-section:nth-child(4) { animation-delay: 0.20s; }
+  .topic-section:nth-child(5) { animation-delay: 0.25s; }
+  .topic-section:nth-child(6) { animation-delay: 0.30s; }
+  .topic-section:nth-child(7) { animation-delay: 0.35s; }
+  .topic-section:nth-child(8) { animation-delay: 0.40s; }
 
-  .track-head {
+  .topic-head {
     padding: 1.5rem 1.2rem;
     border-right: 1px solid var(--border);
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
     gap: 6px;
-    position: relative;
-    overflow: hidden;
+    background: var(--white);
   }
 
-  .track-num {
+  .topic-num {
     font-family: 'Syne', sans-serif;
     font-weight: 800;
     font-size: 2.8rem;
     line-height: 1;
-    opacity: 0.1;
+    opacity: 0.06;
+    color: var(--navy);
     letter-spacing: -0.04em;
   }
 
-  .track-name {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 0.92rem;
-    line-height: 1.3;
-    color: var(--ink);
+  .topic-icon {
+    font-size: 1.4rem;
+    line-height: 1;
   }
 
-  .track-weeks {
-    font-size: 0.6rem;
+  .topic-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.88rem;
+    color: var(--navy);
+    line-height: 1.3;
+  }
+
+  .topic-sub {
+    font-size: 0.58rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--muted);
   }
 
-  .track-tag {
+  .topic-tag {
     display: inline-block;
-    font-size: 0.55rem;
+    font-size: 0.54rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     padding: 3px 8px;
     border: 1px solid;
     width: fit-content;
+    border-color: var(--border);
+    color: var(--muted);
   }
 
-  /* week pills */
-  .week-pills {
-    display: flex;
-    gap: 3px;
-    flex-wrap: wrap;
-    margin-top: 4px;
-  }
-
-  .week-pill {
-    width: 10px;
-    height: 10px;
-    border-radius: 2px;
-    background: var(--border);
-    transition: background 0.3s;
-  }
-
-  .week-pill.filled { background: currentColor; }
-
-  .track-body {
+  .topic-body {
     padding: 1.25rem;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 0.7rem;
     align-content: start;
+    background: var(--pale);
   }
 
-  .module-card {
+  /* cards */
+  .card {
+    background: var(--white);
     border: 1px solid var(--border);
-    padding: 0.8rem;
-    background: var(--card-bg);
+    padding: 0.85rem;
     transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
-    cursor: default;
   }
 
-  .module-card:hover {
-    border-color: var(--ink);
-    box-shadow: 3px 3px 0 var(--ink);
+  .card:hover {
+    border-color: var(--mid);
+    box-shadow: 3px 3px 0 var(--blue);
     transform: translate(-2px, -2px);
   }
 
-  .module-card .mod-title {
+  .card-title {
     font-family: 'Syne', sans-serif;
     font-weight: 600;
-    font-size: 0.76rem;
-    color: var(--ink);
-    margin-bottom: 6px;
+    font-size: 0.74rem;
+    color: var(--navy);
+    margin-bottom: 7px;
     line-height: 1.3;
   }
 
-  .mod-topics {
+  .card-list {
     list-style: none;
   }
 
-  .mod-topics li {
+  .card-list li {
     font-size: 0.62rem;
     color: var(--muted);
     padding: 2px 0 2px 12px;
@@ -457,824 +462,822 @@
     line-height: 1.45;
   }
 
-  .mod-topics li::before {
-    content: '—';
+  .card-list li::before {
+    content: '›';
     position: absolute;
     left: 0;
-    color: var(--border);
+    color: var(--accent);
+    font-weight: bold;
   }
 
-  /* ═══════════════════════════════════════
-     TRACK COLOR CODING
-  ═══════════════════════════════════════ */
-  .t1 .track-num  { color: var(--blue); }
-  .t1 .track-tag  { color: var(--blue); border-color: var(--blue); }
-  .t1 .track-head { border-left: 3px solid var(--blue); }
-  .t1 .week-pill.filled { color: var(--blue); }
+  /* accent left bar by topic */
+  .ts-1 .topic-head { border-left: 3px solid #1e90ff; }
+  .ts-2 .topic-head { border-left: 3px solid #0ea56e; }
+  .ts-3 .topic-head { border-left: 3px solid #1a4b8c; }
+  .ts-4 .topic-head { border-left: 3px solid #7b2ff7; }
+  .ts-5 .topic-head { border-left: 3px solid #e9a825; }
+  .ts-6 .topic-head { border-left: 3px solid #e84a2f; }
+  .ts-7 .topic-head { border-left: 3px solid #2563b0; }
+  .ts-8 .topic-head { border-left: 3px solid #0b8c8c; }
 
-  .t2 .track-num  { color: var(--gold); }
-  .t2 .track-tag  { color: var(--gold); border-color: var(--gold); }
-  .t2 .track-head { border-left: 3px solid var(--gold); }
-  .t2 .week-pill.filled { color: var(--gold); }
+  /* ── ROLES SECTION ── */
+  .roles-section {
+    background: var(--navy);
+    color: white;
+    padding: 2rem;
+    border-top: 3px solid var(--accent);
+  }
 
-  .t3 .track-num  { color: var(--green); }
-  .t3 .track-tag  { color: var(--green); border-color: var(--green); }
-  .t3 .track-head { border-left: 3px solid var(--green); }
-  .t3 .week-pill.filled { color: var(--green); }
+  .roles-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 1.5rem;
+  }
 
-  .t4 .track-num  { color: var(--purple); }
-  .t4 .track-tag  { color: var(--purple); border-color: var(--purple); }
-  .t4 .track-head { border-left: 3px solid var(--purple); }
-  .t4 .week-pill.filled { color: var(--purple); }
+  .roles-icon {
+    font-size: 1.5rem;
+  }
 
-  .t5 .track-num  { color: var(--accent); }
-  .t5 .track-tag  { color: var(--accent); border-color: var(--accent); }
-  .t5 .track-head { border-left: 3px solid var(--accent); }
-  .t5 .week-pill.filled { color: var(--accent); }
+  .roles-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--white);
+    letter-spacing: -0.01em;
+  }
+  .roles-title span { color: var(--accent); }
 
-  .t6 .track-num  { color: var(--blue); }
-  .t6 .track-tag  { color: var(--blue); border-color: var(--blue); }
-  .t6 .track-head { border-left: 3px solid var(--blue); }
-  .t6 .week-pill.filled { color: var(--blue); }
+  .roles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 0.75rem;
+  }
 
-  .t7 .track-num  { color: var(--gold); }
-  .t7 .track-tag  { color: var(--gold); border-color: var(--gold); }
-  .t7 .track-head { border-left: 3px solid var(--gold); }
-  .t7 .week-pill.filled { color: var(--gold); }
+  .role-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 1rem;
+    transition: background 0.2s, border-color 0.2s;
+  }
 
-  /* ═══════════════════════════════════════
+  .role-card:hover {
+    background: rgba(30, 144, 255, 0.12);
+    border-color: var(--accent);
+  }
+
+  .role-card-icon { font-size: 1.2rem; margin-bottom: 6px; }
+
+  .role-card-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: var(--white);
+    margin-bottom: 5px;
+  }
+
+  .role-card-desc {
+    font-size: 0.62rem;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.5;
+  }
+
+  /* ════════════════════════════
      FOOTER
-  ═══════════════════════════════════════ */
+  ════════════════════════════ */
   footer {
-    border-top: 2px solid var(--ink);
-    padding: 1rem 1.75rem;
+    background: var(--navy);
+    border-top: 2px solid var(--blue);
+    padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
     gap: 0.75rem;
-    background: var(--ink);
-    color: var(--paper);
+    color: white;
   }
 
-  footer .f-brand {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 1rem;
+  .f-brand { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1rem; }
+  .f-brand span { color: var(--accent); }
+  .f-note { font-size: 0.6rem; color: rgba(255,255,255,0.4); letter-spacing: 0.06em; }
+  .f-copy { font-size: 0.6rem; color: rgba(255,255,255,0.25); }
+
+  /* ════════════════════════════
+     MOBILE FAB + DRAWER
+  ════════════════════════════ */
+  .fab {
+    display: none;
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 1000;
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: white;
+    border: none;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    box-shadow: 0 4px 20px rgba(30,144,255,0.4);
+    transition: transform 0.2s;
   }
-  footer .f-brand span { color: var(--accent); }
-  footer .f-note { font-size: 0.62rem; color: #888; letter-spacing: 0.06em; }
-  footer .f-copy { font-size: 0.62rem; color: #666; }
+  .fab:hover { transform: scale(1.08); }
 
-  /* ═══════════════════════════════════════
-     SEARCH BAR
-  ═══════════════════════════════════════ */
-  .search-wrap {
-    padding: 0.5rem 1.1rem 0.75rem;
+  .overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 998;
   }
+  .overlay.show { display: block; }
 
-  .search-input {
-    width: 100%;
-    border: 1px solid var(--border);
-    padding: 6px 10px;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    background: var(--card-bg);
-    color: var(--ink);
-    outline: none;
-    transition: border-color 0.15s;
-  }
-
-  .search-input:focus { border-color: var(--ink); }
-  .search-input::placeholder { color: #bbb; }
-
-  /* highlight */
-  mark {
-    background: #fff3b0;
-    color: var(--ink);
-    padding: 0 1px;
-  }
-
-  /* hidden */
-  .track.hidden { display: none; }
-  .module-card.hidden { display: none; }
-
-  /* ═══════════════════════════════════════
-     PRINT
-  ═══════════════════════════════════════ */
-  @media print {
-    .sidebar, .mobile-nav-btn, .search-wrap { display: none; }
-    .wrapper { grid-template-columns: 1fr; }
-    header { position: static; }
-    .track { page-break-inside: avoid; }
+  .close-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.5);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    cursor: pointer;
+    padding: 0 1.2rem 0.6rem;
+    letter-spacing: 0.08em;
   }
 
-  /* ═══════════════════════════════════════
-     RESPONSIVE — TABLET (≤1024px)
-  ═══════════════════════════════════════ */
-  @media (max-width: 1024px) {
-    :root { --sidebar-w: 200px; }
-    .track { grid-template-columns: 160px 1fr; }
-    .track-head { padding: 1.25rem 1rem; }
-    .header-stats .stat-cell:last-child { display: none; }
-  }
-
-  /* ═══════════════════════════════════════
-     RESPONSIVE — MOBILE (≤768px)
-  ═══════════════════════════════════════ */
-  @media (max-width: 768px) {
-    .wrapper { grid-template-columns: 1fr; }
-
-    /* sidebar becomes an off-canvas drawer */
-    .sidebar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 260px;
-      height: 100vh;
-      background: var(--paper);
-      z-index: 999;
-      box-shadow: 4px 0 24px rgba(0,0,0,0.15);
-      transform: translateX(-100%);
-      transition: transform 0.3s ease;
-      border-right: 2px solid var(--ink);
-      padding-top: 1rem;
-      overflow-y: auto;
-    }
-
-    .sidebar.open { transform: translateX(0); }
-
-    .sidebar-close {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      padding: 0 1.1rem 0.75rem;
-    }
-
-    .sidebar-close-btn {
-      background: none;
-      border: none;
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      color: var(--muted);
-      cursor: pointer;
-      letter-spacing: 0.08em;
-    }
-
-    .sidebar-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.4);
-      z-index: 998;
-    }
-
-    .sidebar-overlay.show { display: block; }
-
-    .mobile-nav-btn { display: flex; }
-
-    /* tracks go single column */
-    .track { grid-template-columns: 1fr; }
-
-    .track-head {
-      border-right: none;
-      border-bottom: 1px solid var(--border);
-      padding: 1rem 1.1rem;
-      display: grid;
-      grid-template-columns: auto 1fr auto;
-      grid-template-rows: auto auto;
-      gap: 0 10px;
-      align-items: center;
-    }
-
-    .track-num {
-      font-size: 2rem;
-      grid-row: 1 / 3;
-      opacity: 0.08;
-    }
-
-    .track-name { font-size: 1rem; grid-column: 2; }
-    .track-weeks { grid-column: 2; }
-    .track-tag { grid-column: 3; grid-row: 1; }
-    .week-pills { grid-column: 2 / 4; margin-top: 6px; }
-
-    .track-body {
-      padding: 1rem;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.6rem;
-    }
-
-    /* header simplified */
-    .header-stats { display: none; }
-    .course-sub { display: none; }
-    .logo-block { min-width: 130px; }
-    .header-meta { padding: 0.9rem 1rem; }
-    .course-title { font-size: 1rem; }
-    .faculty-strip { padding: 0.6rem 1rem; gap: 1rem; }
-  }
-
-  /* ═══════════════════════════════════════
-     RESPONSIVE — SMALL MOBILE (≤480px)
-  ═══════════════════════════════════════ */
-  @media (max-width: 480px) {
-    .track-body { grid-template-columns: 1fr; }
-    .logo-block { padding: 0.9rem 1rem; }
-    .logo-block .brand { font-size: 1.2rem; }
-    footer { flex-direction: column; text-align: center; gap: 0.5rem; }
-  }
-
-  /* ═══════════════════════════════════════
-     ANIMATION
-  ═══════════════════════════════════════ */
+  /* ════════════════════════════
+     ANIMATIONS
+  ════════════════════════════ */
   @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(16px); }
+    from { opacity: 0; transform: translateY(14px); }
     to   { opacity: 1; transform: translateY(0); }
   }
 
-  .track { animation: fadeUp 0.4s ease both; }
-  .t1 { animation-delay: 0.05s; }
-  .t2 { animation-delay: 0.10s; }
-  .t3 { animation-delay: 0.15s; }
-  .t4 { animation-delay: 0.20s; }
-  .t5 { animation-delay: 0.25s; }
-  .t6 { animation-delay: 0.30s; }
-  .t7 { animation-delay: 0.35s; }
+  /* ════════════════════════════
+     RESPONSIVE — TABLET
+  ════════════════════════════ */
+  @media (max-width: 1024px) {
+    .wrapper { grid-template-columns: 200px 1fr; }
+    .topic-section { grid-template-columns: 160px 1fr; }
+    .stats-col .stat-box:last-child { display: none; }
+  }
+
+  /* ════════════════════════════
+     RESPONSIVE — MOBILE
+  ════════════════════════════ */
+  @media (max-width: 768px) {
+    .wrapper { grid-template-columns: 1fr; }
+
+    .sidebar {
+      position: fixed;
+      top: 0; left: 0;
+      width: 260px; height: 100vh;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+      z-index: 999;
+      padding-top: 1rem;
+      overflow-y: auto;
+    }
+    .sidebar.open { transform: translateX(0); }
+
+    .close-btn { display: block; }
+    .fab { display: flex; }
+
+    .topic-section { grid-template-columns: 1fr; }
+    .topic-head {
+      border-right: none;
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 1.2rem;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 0 10px;
+    }
+    .topic-num { font-size: 1.8rem; grid-row: 1 / 3; opacity: 0.05; }
+    .topic-icon { display: none; }
+    .topic-name { font-size: 0.95rem; }
+    .topic-body { grid-template-columns: 1fr 1fr; padding: 1rem; }
+    .intro-banner { grid-template-columns: 1fr; }
+    .intro-badge { display: none; }
+    .stats-col { display: none; }
+    .course-tags { display: none; }
+    .roles-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 480px) {
+    .topic-body { grid-template-columns: 1fr; }
+    .roles-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; text-align: center; }
+  }
 </style>
 </head>
 <body>
 
-<!-- sidebar overlay for mobile -->
-<div class="sidebar-overlay" id="overlay"></div>
+<div class="overlay" id="overlay"></div>
+<button class="fab" id="fab" aria-label="Menu">☰</button>
 
-<!-- floating nav button for mobile -->
-<button class="mobile-nav-btn" id="navToggle" aria-label="Open navigation">☰</button>
-
+<!-- ══ HEADER ══ -->
 <header>
-  <div class="header-top">
-    <div class="logo-block">
+  <div class="header-inner">
+    <div class="logo-col">
       <div class="brand">Sachi<span>Tech</span></div>
       <div class="tagline">Institute of Technology</div>
     </div>
-    <div class="header-meta">
-      <div class="course-title">Data <span>Analysis</span><br>Complete Syllabus</div>
-      <div class="course-sub">Python · ML · Statistics · Deep Learning · Excel · SQL · Power BI</div>
+    <div class="title-col">
+      <div class="course-name">Data <span>Analyst</span> — Complete Syllabus</div>
+      <div class="course-tags">
+        <span class="ctag">Excel</span>
+        <span class="ctag">SQL</span>
+        <span class="ctag">Python</span>
+        <span class="ctag">Power BI</span>
+        <span class="ctag">Statistics</span>
+        <span class="ctag">Tableau</span>
+      </div>
     </div>
-    <div class="header-stats">
-      <div class="stat-cell"><div class="num">7</div><div class="lbl">Tracks</div></div>
-      <div class="stat-cell"><div class="num">35+</div><div class="lbl">Modules</div></div>
-      <div class="stat-cell"><div class="num">34</div><div class="lbl">Weeks</div></div>
+    <div class="stats-col">
+      <div class="stat-box"><div class="stat-num">8</div><div class="stat-lbl">Modules</div></div>
+      <div class="stat-box"><div class="stat-num">28</div><div class="stat-lbl">Weeks</div></div>
+      <div class="stat-box"><div class="stat-num">0→Pro</div><div class="stat-lbl">Level</div></div>
     </div>
   </div>
   <div class="faculty-strip">
-    <div class="faculty-label">Faculty</div>
-    <div class="faculty-list">
-      <div class="faculty-item">
-        <div class="avatar av-red">ST</div>
-        <div class="faculty-info">
-          <div class="name">Sachin Thete</div>
-          <div class="role">Director, SachiTech</div>
+    <div class="fac-label">Faculty</div>
+    <div class="fac-list">
+      <div class="fac-item">
+        <div class="avatar av-blue">ST</div>
+        <div>
+          <div class="fac-name">Sachin Thete</div>
+          <div class="fac-role">Director, SachiTech</div>
         </div>
       </div>
-      <div class="faculty-item">
+      <div class="fac-item">
         <div class="avatar av-gold">KP</div>
-        <div class="faculty-info">
-          <div class="name">Kunal Patil</div>
-          <div class="role">Data Scientist</div>
+        <div>
+          <div class="fac-name">Kunal Patil</div>
+          <div class="fac-role">Data Scientist</div>
         </div>
       </div>
     </div>
   </div>
 </header>
 
+<!-- ══ WRAPPER ══ -->
 <div class="wrapper">
 
   <!-- SIDEBAR -->
   <aside class="sidebar" id="sidebar">
-    <div class="sidebar-close">
-      <button class="sidebar-close-btn" id="sidebarClose">✕ close</button>
+    <button class="close-btn" id="closeBtn">✕ close</button>
+
+    <div class="sb-section">
+      <div class="sb-title">Search</div>
+      <input class="sb-search" id="searchInput" type="text" placeholder="e.g. pandas, joins…">
     </div>
 
-    <div class="sidebar-section search-wrap">
-      <div class="sidebar-title">Search Topics</div>
-      <input class="search-input" id="searchInput" type="text" placeholder="e.g. pandas, joins, CNN…">
-    </div>
-
-    <div class="sidebar-section">
-      <div class="sidebar-title">Tracks</div>
-      <nav class="track-nav" id="trackNav">
-        <a href="#python" data-track="t1"><div class="track-dot" style="background:#1a3a5c;"></div>Python</a>
-        <a href="#excel"  data-track="t2"><div class="track-dot" style="background:#c8952a;"></div>Advanced Excel</a>
-        <a href="#sql"    data-track="t3"><div class="track-dot" style="background:#2d7a4f;"></div>SQL</a>
-        <a href="#powerbi" data-track="t4"><div class="track-dot" style="background:#8b2fc9;"></div>Power BI</a>
-        <a href="#stats"  data-track="t5"><div class="track-dot" style="background:#e84a2f;"></div>Statistics</a>
-        <a href="#ml"     data-track="t6"><div class="track-dot" style="background:#1a3a5c;"></div>Machine Learning</a>
-        <a href="#dl"     data-track="t7"><div class="track-dot" style="background:#c8952a;"></div>Deep Learning</a>
+    <div class="sb-section">
+      <div class="sb-title">Modules</div>
+      <nav class="sb-nav" id="sbNav">
+        <a href="#basics"><div class="dot" style="background:#1e90ff;"></div>Basics of DA</a>
+        <a href="#excel"><div class="dot" style="background:#0ea56e;"></div>Excel / G Sheets</a>
+        <a href="#sql"><div class="dot" style="background:#1a4b8c;"></div>SQL</a>
+        <a href="#python"><div class="dot" style="background:#7b2ff7;"></div>Python</a>
+        <a href="#dataviz"><div class="dot" style="background:#e9a825;"></div>Data Visualization</a>
+        <a href="#stats"><div class="dot" style="background:#e84a2f;"></div>Statistics</a>
+        <a href="#cleaning"><div class="dot" style="background:#2563b0;"></div>Data Cleaning</a>
+        <a href="#business"><div class="dot" style="background:#0b8c8c;"></div>Business Understanding</a>
       </nav>
     </div>
 
-    <div class="sidebar-section">
-      <div class="sidebar-title">Course Info</div>
-      <div class="info-row"><span>Duration</span><strong>~34 weeks</strong></div>
-      <div class="info-row"><span>Level</span><strong>0 → Expert</strong></div>
+    <div class="sb-section">
+      <div class="sb-title">Course Info</div>
+      <div class="info-row"><span>Duration</span><strong>~28 weeks</strong></div>
+      <div class="info-row"><span>Level</span><strong>0 → Pro</strong></div>
       <div class="info-row"><span>Mode</span><strong>Offline / Online</strong></div>
-      <div class="info-row"><span>Projects</span><strong>7 Capstone</strong></div>
-      <div class="info-row"><span>Tools</span><strong>Python, SQL, PBI</strong></div>
-      <div class="badge-cert">Certificate Course</div>
+      <div class="info-row"><span>Projects</span><strong>8 Capstone</strong></div>
+      <div class="info-row"><span>Deep Learning</span><strong>Theory Only</strong></div>
+      <div class="badge">Certificate Course</div>
     </div>
 
-    <div class="sidebar-section">
-      <div class="sidebar-title">Timeline</div>
-      <div class="progress-wrap" id="progressWrap">
-        <!-- dynamically populated -->
-      </div>
+    <div class="sb-section">
+      <div class="sb-title">DA Role Includes</div>
+      <div class="role-pill"><span class="role-icon">›</span>Create Reports &amp; Dashboards</div>
+      <div class="role-pill"><span class="role-icon">›</span>Find Trends in Data</div>
+      <div class="role-pill"><span class="role-icon">›</span>Data Cleaning &amp; Preparation</div>
+      <div class="role-pill"><span class="role-icon">›</span>Visualize &amp; Present Insights</div>
+      <div class="role-pill"><span class="role-icon">›</span>Support Business Decisions</div>
     </div>
 
-    <div class="sidebar-section">
-      <div class="sidebar-title">Contact</div>
+    <div class="sb-section">
+      <div class="sb-title">Contact</div>
       <div class="info-row" style="flex-direction:column;gap:3px;">
-        <span style="color:var(--muted);">SachiTech Institute</span>
-        <strong style="font-size:0.65rem;">www.sachitech.in</strong>
+        <span style="color:rgba(255,255,255,0.4)">SachiTech Institute</span>
+        <strong style="font-size:0.65rem;color:rgba(255,255,255,0.8)">www.sachitech.in</strong>
       </div>
     </div>
   </aside>
 
-  <!-- CONTENT -->
+  <!-- MAIN CONTENT -->
   <main class="content" id="mainContent">
 
-    <!-- TRACK 1: PYTHON -->
-    <section class="track t1" id="python">
-      <div class="track-head">
-        <div class="track-num">01</div>
-        <div class="track-name">Python Programming</div>
-        <div class="track-weeks">5 weeks</div>
-        <div class="track-tag">Beginner</div>
-        <div class="week-pills" data-weeks="5" data-total="40"></div>
+    <!-- INTRO BANNER -->
+    <div class="intro-banner">
+      <div>
+        <div class="intro-heading">Become a <span>Data Analyst</span> from Scratch</div>
+        <div class="intro-desc">A structured, industry-aligned curriculum covering every tool and skill a modern Data Analyst needs — from spreadsheets to Python, SQL to dashboards, and statistics to business storytelling.</div>
       </div>
-      <div class="track-body">
-        <div class="module-card">
-          <div class="mod-title">Introduction &amp; Setup</div>
-          <ul class="mod-topics">
-            <li>What is Python &amp; its features</li>
-            <li>Installing Python, Jupyter Notebook</li>
-            <li>Google Colab setup</li>
-            <li>Running .py scripts</li>
+      <div class="intro-badge">Certificate<br>Program</div>
+    </div>
+
+    <!-- MODULE 1: BASICS -->
+    <section class="topic-section ts-1" id="basics">
+      <div class="topic-head">
+        <div class="topic-num">01</div>
+        <div class="topic-icon">📊</div>
+        <div class="topic-name">Basics of Data Analysis</div>
+        <div class="topic-sub">3 weeks</div>
+        <div class="topic-tag">Foundation</div>
+      </div>
+      <div class="topic-body">
+        <div class="card">
+          <div class="card-title">What is Data Analysis?</div>
+          <ul class="card-list">
+            <li>Definition &amp; importance of DA</li>
+            <li>Types of data: structured, unstructured</li>
+            <li>Data analysis lifecycle</li>
+            <li>Roles: Analyst vs Scientist vs Engineer</li>
           </ul>
         </div>
-        <div class="module-card">
-          <div class="mod-title">Syntax, Data Types &amp; Operators</div>
-          <ul class="mod-topics">
-            <li>Variables, int, float, str, bool, None</li>
-            <li>Type conversion (implicit &amp; explicit)</li>
-            <li>Arithmetic, comparison, logical operators</li>
-            <li>Membership &amp; identity operators</li>
+        <div class="card">
+          <div class="card-title">Types of Analysis</div>
+          <ul class="card-list">
+            <li>Descriptive — what happened?</li>
+            <li>Diagnostic — why did it happen?</li>
+            <li>Predictive — what will happen?</li>
+            <li>Prescriptive — what should we do?</li>
           </ul>
         </div>
-        <div class="module-card">
-          <div class="mod-title">Data Structures</div>
-          <ul class="mod-topics">
-            <li>Lists, indexing, slicing, comprehension</li>
-            <li>Tuples — immutability, count(), index()</li>
-            <li>Dictionaries — keys, values, items</li>
-            <li>Sets — union, intersection, difference</li>
-          </ul>
-        </div>
-        <div class="module-card">
-          <div class="mod-title">Control Flow &amp; Functions</div>
-          <ul class="mod-topics">
-            <li>if / elif / else conditionals</li>
-            <li>for &amp; while loops, break, continue</li>
-            <li>def, arguments, default &amp; keyword args</li>
-            <li>Lambda functions, return values</li>
+        <div class="card">
+          <div class="card-title">Data Sources &amp; Formats</div>
+          <ul class="card-list">
+            <li>CSV, Excel, JSON, Databases</li>
+            <li>APIs &amp; web scraping basics</li>
+            <li>Primary vs secondary data</li>
+            <li>Data quality &amp; governance</li>
           </ul>
         </div>
       </div>
     </section>
 
-    <!-- TRACK 2: ADVANCED EXCEL -->
-    <section class="track t2" id="excel">
-      <div class="track-head">
-        <div class="track-num">02</div>
-        <div class="track-name">Advanced Excel</div>
-        <div class="track-weeks">4 weeks</div>
-        <div class="track-tag">Intermediate</div>
-        <div class="week-pills" data-weeks="4" data-total="40"></div>
+    <!-- MODULE 2: EXCEL -->
+    <section class="topic-section ts-2" id="excel">
+      <div class="topic-head">
+        <div class="topic-num">02</div>
+        <div class="topic-icon">📗</div>
+        <div class="topic-name">Excel / Google Sheets</div>
+        <div class="topic-sub">4 weeks</div>
+        <div class="topic-tag">Intermediate</div>
       </div>
-      <div class="track-body">
-        <div class="module-card">
-          <div class="mod-title">Advanced Formulas</div>
-          <ul class="mod-topics">
-            <li>VLOOKUP, HLOOKUP, XLOOKUP</li>
-            <li>INDEX / MATCH combinations</li>
-            <li>Nested IF, array formulas</li>
+      <div class="topic-body">
+        <div class="card">
+          <div class="card-title">Core Formulas</div>
+          <ul class="card-list">
+            <li>VLOOKUP, XLOOKUP, INDEX/MATCH</li>
             <li>SUMIFS, COUNTIFS, AVERAGEIFS</li>
+            <li>Nested IF, IFS, IFERROR</li>
+            <li>TEXT, DATE, and logical functions</li>
           </ul>
         </div>
-        <div class="module-card">
-          <div class="mod-title">Pivot Tables &amp; Power Query</div>
-          <ul class="mod-topics">
-            <li>Pivot tables, slicers, calculated fields</li>
-            <li>Power Query — ETL workflows</li>
-            <li>Power Pivot &amp; data modeling</li>
-            <li>DAX basics</li>
+        <div class="card">
+          <div class="card-title">Pivot Tables &amp; Charts</div>
+          <ul class="card-list">
+            <li>Building &amp; formatting pivot tables</li>
+            <li>Slicers, timelines, calculated fields</li>
+            <li>Chart types &amp; best practices</li>
+            <li>Dynamic dashboard with slicers</li>
           </ul>
         </div>
-        <div class="module-card">
-          <div class="mod-title">Dashboards &amp; Macros</div>
-          <ul class="mod-topics">
-            <li>Chart types, conditional formatting</li>
-            <li>Dynamic dashboards with slicers</li>
-            <li>VBA macro basics</li>
-            <li>Data validation &amp; protection</li>
+        <div class="card">
+          <div class="card-title">Google Sheets Specifics</div>
+          <ul class="card-list">
+            <li>QUERY function (SQL-like syntax)</li>
+            <li>IMPORTRANGE &amp; real-time data</li>
+            <li>Conditional formatting &amp; rules</li>
+            <li>Collaboration &amp; sharing features</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-title">Power Query Basics</div>
+          <ul class="card-list">
+            <li>Importing &amp; transforming data</li>
+            <li>Merge &amp; append queries</li>
+            <li>Data type handling</li>
+            <li>Refreshable reports</li>
           </ul>
         </div>
       </div>
     </section>
 
-    <!-- TRACK 3: SQL -->
-    <section class="track t3" id="sql">
-      <div class="track-head">
-        <div class="track-num">03</div>
-        <div class="track-name">SQL</div>
-        <div class="track-weeks">4 weeks</div>
-        <div class="track-tag">Intermediate</div>
-        <div class="week-pills" data-weeks="4" data-total="40"></div>
+    <!-- MODULE 3: SQL -->
+    <section class="topic-section ts-3" id="sql">
+      <div class="topic-head">
+        <div class="topic-num">03</div>
+        <div class="topic-icon">🗄️</div>
+        <div class="topic-name">SQL</div>
+        <div class="topic-sub">4 weeks</div>
+        <div class="topic-tag">Intermediate</div>
       </div>
-      <div class="track-body">
-        <div class="module-card">
-          <div class="mod-title">SQL Fundamentals</div>
-          <ul class="mod-topics">
-            <li>SELECT, WHERE, GROUP BY, ORDER BY</li>
-            <li>HAVING, DISTINCT, LIMIT</li>
-            <li>Aggregate: COUNT, SUM, AVG, MIN, MAX</li>
-            <li>Filtering &amp; sorting data</li>
+      <div class="topic-body">
+        <div class="card">
+          <div class="card-title">SQL Fundamentals</div>
+          <ul class="card-list">
+            <li>SELECT, WHERE, ORDER BY, LIMIT</li>
+            <li>GROUP BY, HAVING, DISTINCT</li>
+            <li>COUNT, SUM, AVG, MIN, MAX</li>
+            <li>Filtering with AND, OR, NOT, IN</li>
           </ul>
         </div>
-        <div class="module-card">
-          <div class="mod-title">Joins, Subqueries &amp; CTEs</div>
-          <ul class="mod-topics">
+        <div class="card">
+          <div class="card-title">Joins &amp; Relationships</div>
+          <ul class="card-list">
             <li>INNER, LEFT, RIGHT, FULL joins</li>
-            <li>Nested subqueries</li>
-            <li>WITH clause (CTEs)</li>
-            <li>UNION, INTERSECT, EXCEPT</li>
+            <li>Self-joins &amp; cross-joins</li>
+            <li>Primary &amp; foreign keys</li>
+            <li>Relational database concepts</li>
           </ul>
         </div>
-        <div class="module-card">
-          <div class="mod-title">Window Functions</div>
-          <ul class="mod-topics">
-            <li>ROW_NUMBER, RANK, DENSE_RANK</li>
-            <li>LEAD, LAG, PARTITION BY</li>
-            <li>Running totals &amp; moving averages</li>
-            <li>Query performance &amp; indexing</li>
+        <div class="card">
+          <div class="card-title">Advanced SQL</div>
+          <ul class="card-list">
+            <li>Subqueries &amp; CTEs (WITH clause)</li>
+            <li>Window functions: RANK, ROW_NUMBER, LAG</li>
+            <li>UNION, INTERSECT, EXCEPT</li>
+            <li>Query optimization &amp; indexing</li>
           </ul>
         </div>
       </div>
     </section>
 
-    <!-- TRACK 4: POWER BI -->
-    <section class="track t4" id="powerbi">
-      <div class="track-head">
-        <div class="track-num">04</div>
-        <div class="track-name">Power BI</div>
-        <div class="track-weeks">4 weeks</div>
-        <div class="track-tag">Intermediate</div>
-        <div class="week-pills" data-weeks="4" data-total="40"></div>
+    <!-- MODULE 4: PYTHON -->
+    <section class="topic-section ts-4" id="python">
+      <div class="topic-head">
+        <div class="topic-num">04</div>
+        <div class="topic-icon">🐍</div>
+        <div class="topic-name">Python — Pandas &amp; NumPy</div>
+        <div class="topic-sub">6 weeks</div>
+        <div class="topic-tag">Intermediate</div>
       </div>
-      <div class="track-body">
-        <div class="module-card">
-          <div class="mod-title">Data Ingestion &amp; Power Query</div>
-          <ul class="mod-topics">
-            <li>Connecting to Excel, SQL, CSV sources</li>
-            <li>Transforming data with Power Query</li>
-            <li>M language basics</li>
-            <li>Append &amp; merge queries</li>
+      <div class="topic-body">
+        <div class="card">
+          <div class="card-title">Python Foundations</div>
+          <ul class="card-list">
+            <li>Variables, data types, operators</li>
+            <li>Lists, dicts, tuples, sets</li>
+            <li>Loops, conditionals, functions</li>
+            <li>Jupyter Notebook / Google Colab</li>
           </ul>
         </div>
-        <div class="module-card">
-          <div class="mod-title">DAX &amp; Data Modeling</div>
-          <ul class="mod-topics">
-            <li>Calculated columns &amp; measures</li>
-            <li>CALCULATE, FILTER, ALL, SUMX</li>
-            <li>Table relationships &amp; star schema</li>
-            <li>Time intelligence functions</li>
+        <div class="card">
+          <div class="card-title">NumPy</div>
+          <ul class="card-list">
+            <li>Arrays, shapes, dtypes</li>
+            <li>Array operations &amp; broadcasting</li>
+            <li>Statistical functions</li>
+            <li>Random module &amp; seeding</li>
           </ul>
         </div>
-        <div class="module-card">
-          <div class="mod-title">Dashboards &amp; Publishing</div>
-          <ul class="mod-topics">
-            <li>Chart types, maps, KPI visuals</li>
-            <li>Drill-through, bookmarks, tooltips</li>
-            <li>Row-level security (RLS)</li>
+        <div class="card">
+          <div class="card-title">Pandas — DataFrames</div>
+          <ul class="card-list">
+            <li>Series &amp; DataFrame creation</li>
+            <li>Selecting, filtering, indexing</li>
+            <li>groupby, agg, pivot_table</li>
+            <li>Merge, join, concat</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-title">Pandas — Data Ops</div>
+          <ul class="card-list">
+            <li>Reading CSV, Excel, JSON, SQL</li>
+            <li>Handling missing values</li>
+            <li>apply(), map(), lambda</li>
+            <li>Datetime &amp; string operations</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- MODULE 5: DATA VIZ -->
+    <section class="topic-section ts-5" id="dataviz">
+      <div class="topic-head">
+        <div class="topic-num">05</div>
+        <div class="topic-icon">📈</div>
+        <div class="topic-name">Data Visualization</div>
+        <div class="topic-sub">4 weeks</div>
+        <div class="topic-tag">Intermediate</div>
+      </div>
+      <div class="topic-body">
+        <div class="card">
+          <div class="card-title">Python Visualization</div>
+          <ul class="card-list">
+            <li>Matplotlib — bar, line, scatter, pie</li>
+            <li>Seaborn — heatmap, boxplot, pairplot</li>
+            <li>Plotly — interactive charts</li>
+            <li>Chart selection best practices</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-title">Power BI</div>
+          <ul class="card-list">
+            <li>Connecting data sources</li>
+            <li>DAX measures &amp; calculated columns</li>
+            <li>Interactive dashboards &amp; drill-through</li>
             <li>Publishing to Power BI Service</li>
           </ul>
         </div>
+        <div class="card">
+          <div class="card-title">Tableau</div>
+          <ul class="card-list">
+            <li>Tableau Desktop / Public basics</li>
+            <li>Dimensions vs measures</li>
+            <li>Filters, parameters, calculated fields</li>
+            <li>Storypoints &amp; dashboard publishing</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-title">Storytelling with Data</div>
+          <ul class="card-list">
+            <li>Choosing the right chart type</li>
+            <li>Color theory &amp; accessibility</li>
+            <li>Designing for your audience</li>
+            <li>Presenting insights clearly</li>
+          </ul>
+        </div>
       </div>
     </section>
 
-    <!-- TRACK 5: STATISTICS -->
-    <section class="track t5" id="stats">
-      <div class="track-head">
-        <div class="track-num">05</div>
-        <div class="track-name">Statistics</div>
-        <div class="track-weeks">5 weeks</div>
-        <div class="track-tag">Core Theory</div>
-        <div class="week-pills" data-weeks="5" data-total="40"></div>
+    <!-- MODULE 6: STATISTICS -->
+    <section class="topic-section ts-6" id="stats">
+      <div class="topic-head">
+        <div class="topic-num">06</div>
+        <div class="topic-icon">📐</div>
+        <div class="topic-name">Statistics</div>
+        <div class="topic-sub">4 weeks</div>
+        <div class="topic-tag">Core Theory</div>
       </div>
-      <div class="track-body">
-        <div class="module-card">
-          <div class="mod-title">Descriptive Statistics</div>
-          <ul class="mod-topics">
+      <div class="topic-body">
+        <div class="card">
+          <div class="card-title">Descriptive Statistics</div>
+          <ul class="card-list">
             <li>Mean, median, mode</li>
-            <li>Variance, std deviation</li>
+            <li>Variance &amp; standard deviation</li>
+            <li>Percentiles, IQR, range</li>
             <li>Skewness &amp; kurtosis</li>
-            <li>Percentiles &amp; IQR</li>
           </ul>
         </div>
-        <div class="module-card">
-          <div class="mod-title">Probability &amp; Distributions</div>
-          <ul class="mod-topics">
-            <li>Bayes theorem</li>
-            <li>Normal, binomial, Poisson</li>
-            <li>Central limit theorem</li>
-            <li>Confidence intervals</li>
-          </ul>
-        </div>
-        <div class="module-card">
-          <div class="mod-title">Inferential Statistics</div>
-          <ul class="mod-topics">
-            <li>Hypothesis testing, p-value</li>
-            <li>t-test, z-test, chi-square</li>
-            <li>ANOVA</li>
-            <li>Type I &amp; Type II errors</li>
-          </ul>
-        </div>
-        <div class="module-card">
-          <div class="mod-title">Correlation &amp; Regression</div>
-          <ul class="mod-topics">
+        <div class="card">
+          <div class="card-title">Correlation &amp; Relationships</div>
+          <ul class="card-list">
             <li>Pearson &amp; Spearman correlation</li>
-            <li>Simple &amp; multiple regression</li>
-            <li>R², RMSE, MAE</li>
-            <li>Multicollinearity</li>
+            <li>Scatter plots &amp; trend lines</li>
+            <li>Causation vs correlation</li>
+            <li>Covariance basics</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-title">Probability Basics</div>
+          <ul class="card-list">
+            <li>Probability rules &amp; events</li>
+            <li>Normal distribution &amp; bell curve</li>
+            <li>Z-scores &amp; standard normal</li>
+            <li>Central limit theorem (concept)</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-title">Inferential Stats (Overview)</div>
+          <ul class="card-list">
+            <li>Hypothesis testing — concept</li>
+            <li>p-value interpretation</li>
+            <li>Confidence intervals</li>
+            <li>A/B testing basics</li>
           </ul>
         </div>
       </div>
     </section>
 
-    <!-- TRACK 6: MACHINE LEARNING -->
-    <section class="track t6" id="ml">
-      <div class="track-head">
-        <div class="track-num">06</div>
-        <div class="track-name">Machine Learning</div>
-        <div class="track-weeks">8 weeks</div>
-        <div class="track-tag">Advanced</div>
-        <div class="week-pills" data-weeks="8" data-total="40"></div>
+    <!-- MODULE 7: DATA CLEANING -->
+    <section class="topic-section ts-7" id="cleaning">
+      <div class="topic-head">
+        <div class="topic-num">07</div>
+        <div class="topic-icon">🧹</div>
+        <div class="topic-name">Data Cleaning &amp; Preprocessing</div>
+        <div class="topic-sub">3 weeks</div>
+        <div class="topic-tag">Practical</div>
       </div>
-      <div class="track-body">
-        <div class="module-card">
-          <div class="mod-title">Data Preprocessing</div>
-          <ul class="mod-topics">
-            <li>Handling missing values (mean/median/mode)</li>
-            <li>One-hot &amp; label encoding</li>
-            <li>Normalization vs standardization</li>
-            <li>Outlier handling: Z-score, IQR</li>
+      <div class="topic-body">
+        <div class="card">
+          <div class="card-title">Handling Missing Data</div>
+          <ul class="card-list">
+            <li>Identifying nulls &amp; blanks</li>
+            <li>Drop vs impute (mean/median/mode)</li>
+            <li>Forward fill &amp; backward fill</li>
+            <li>Missing data patterns</li>
           </ul>
         </div>
-        <div class="module-card">
-          <div class="mod-title">Supervised — Regression</div>
-          <ul class="mod-topics">
-            <li>Linear &amp; multiple regression</li>
-            <li>Polynomial regression</li>
-            <li>Ridge &amp; Lasso regression</li>
-            <li>Metrics: RMSE, MAE, R²</li>
+        <div class="card">
+          <div class="card-title">Data Transformation</div>
+          <ul class="card-list">
+            <li>Type casting &amp; parsing</li>
+            <li>Normalizing &amp; standardizing</li>
+            <li>Encoding categorical variables</li>
+            <li>Date &amp; string formatting</li>
           </ul>
         </div>
-        <div class="module-card">
-          <div class="mod-title">Supervised — Classification</div>
-          <ul class="mod-topics">
-            <li>Logistic regression</li>
-            <li>Decision Trees, Random Forest</li>
-            <li>SVM, KNN</li>
-            <li>Accuracy, Precision, Recall, F1, ROC</li>
+        <div class="card">
+          <div class="card-title">Outlier Detection</div>
+          <ul class="card-list">
+            <li>Boxplot &amp; IQR method</li>
+            <li>Z-score method</li>
+            <li>Removing vs capping outliers</li>
+            <li>Impact on analysis</li>
           </ul>
         </div>
-        <div class="module-card">
-          <div class="mod-title">Unsupervised Learning</div>
-          <ul class="mod-topics">
-            <li>K-Means, Hierarchical clustering</li>
-            <li>DBSCAN</li>
-            <li>PCA, t-SNE</li>
-            <li>Dimensionality reduction</li>
-          </ul>
-        </div>
-        <div class="module-card">
-          <div class="mod-title">Model Evaluation &amp; Tuning</div>
-          <ul class="mod-topics">
-            <li>Train-test split, k-fold CV</li>
-            <li>Overfitting vs underfitting</li>
-            <li>GridSearchCV, RandomizedSearchCV</li>
-            <li>Feature importance</li>
-          </ul>
-        </div>
-        <div class="module-card">
-          <div class="mod-title">Visualization for ML</div>
-          <ul class="mod-topics">
-            <li>Matplotlib &amp; Seaborn</li>
-            <li>Histograms, box plots, scatter</li>
-            <li>Heatmaps &amp; correlation matrix</li>
-            <li>Confusion matrix plots</li>
+        <div class="card">
+          <div class="card-title">Data Quality Checks</div>
+          <ul class="card-list">
+            <li>Duplicate detection &amp; removal</li>
+            <li>Consistency &amp; format validation</li>
+            <li>Referential integrity checks</li>
+            <li>Documenting cleaning steps</li>
           </ul>
         </div>
       </div>
     </section>
 
-    <!-- TRACK 7: DEEP LEARNING (Theory Only) -->
-    <section class="track t7" id="dl">
-      <div class="track-head">
-        <div class="track-num">07</div>
-        <div class="track-name">Deep Learning</div>
-        <div class="track-weeks">4 weeks</div>
-        <div class="track-tag">Theory Only</div>
-        <div class="week-pills" data-weeks="4" data-total="40"></div>
-        <div style="font-size:0.58rem;color:var(--muted);margin-top:4px;font-style:italic;">Conceptual overview — not part of DA practical scope</div>
+    <!-- MODULE 8: BUSINESS -->
+    <section class="topic-section ts-8" id="business">
+      <div class="topic-head">
+        <div class="topic-num">08</div>
+        <div class="topic-icon">💼</div>
+        <div class="topic-name">Basic Business Understanding</div>
+        <div class="topic-sub">2 weeks</div>
+        <div class="topic-tag">Applied</div>
       </div>
-      <div class="track-body">
-        <div class="module-card">
-          <div class="mod-title">What is Deep Learning?</div>
-          <ul class="mod-topics">
-            <li>Difference: ML vs Deep Learning</li>
-            <li>When &amp; why deep learning is used</li>
-            <li>Overview of neural networks</li>
-            <li>Real-world applications</li>
+      <div class="topic-body">
+        <div class="card">
+          <div class="card-title">Business Metrics</div>
+          <ul class="card-list">
+            <li>KPIs, OKRs &amp; business goals</li>
+            <li>Revenue, cost, profit margins</li>
+            <li>Customer: CAC, LTV, churn rate</li>
+            <li>Funnel analysis &amp; conversion</li>
           </ul>
         </div>
-        <div class="module-card">
-          <div class="mod-title">Neural Network Concepts</div>
-          <ul class="mod-topics">
-            <li>Perceptron &amp; layers (input, hidden, output)</li>
-            <li>Activation functions (ReLU, Sigmoid, Softmax)</li>
-            <li>Forward pass &amp; backpropagation — concept</li>
-            <li>Loss functions &amp; gradient descent — idea</li>
+        <div class="card">
+          <div class="card-title">Domains &amp; Use Cases</div>
+          <ul class="card-list">
+            <li>Sales &amp; marketing analytics</li>
+            <li>Finance &amp; operations data</li>
+            <li>HR &amp; product analytics</li>
+            <li>Healthcare &amp; e-commerce</li>
           </ul>
         </div>
-        <div class="module-card">
-          <div class="mod-title">Key Architectures — Overview</div>
-          <ul class="mod-topics">
-            <li>CNNs — what they do &amp; use cases</li>
-            <li>RNNs / LSTMs — sequential data concept</li>
-            <li>Transformers &amp; attention — high-level idea</li>
-            <li>BERT, GPT — what they are (no coding)</li>
-          </ul>
-        </div>
-        <div class="module-card">
-          <div class="mod-title">DL in the Data Analyst Context</div>
-          <ul class="mod-topics">
-            <li>How analysts interact with DL models</li>
-            <li>Pre-trained models &amp; APIs (no training)</li>
-            <li>Understanding model outputs &amp; metrics</li>
-            <li>When to escalate to a Data Scientist</li>
+        <div class="card">
+          <div class="card-title">Communication Skills</div>
+          <ul class="card-list">
+            <li>Writing data-driven reports</li>
+            <li>Presenting to non-technical stakeholders</li>
+            <li>Dashboard documentation</li>
+            <li>Insight → Action → Outcome</li>
           </ul>
         </div>
       </div>
     </section>
+
+    <!-- ROLES SECTION -->
+    <div class="roles-section" id="roles">
+      <div class="roles-header">
+        <div class="roles-icon">🎯</div>
+        <div class="roles-title">What a <span>Data Analyst</span> Does</div>
+      </div>
+      <div class="roles-grid">
+        <div class="role-card">
+          <div class="role-card-icon">📊</div>
+          <div class="role-card-title">Build Reports &amp; Dashboards</div>
+          <div class="role-card-desc">Design automated, interactive reports in Power BI, Tableau, or Excel that help stakeholders track KPIs in real time.</div>
+        </div>
+        <div class="role-card">
+          <div class="role-card-icon">🔍</div>
+          <div class="role-card-title">Find Trends in Data</div>
+          <div class="role-card-desc">Identify patterns, seasonality, and anomalies in large datasets using SQL, Python, and statistical methods.</div>
+        </div>
+        <div class="role-card">
+          <div class="role-card-icon">🧹</div>
+          <div class="role-card-title">Clean &amp; Prepare Data</div>
+          <div class="role-card-desc">Transform raw, messy data into reliable, analysis-ready datasets using Pandas, SQL, and Power Query.</div>
+        </div>
+        <div class="role-card">
+          <div class="role-card-icon">💡</div>
+          <div class="role-card-title">Generate Business Insights</div>
+          <div class="role-card-desc">Translate numbers into clear stories and actionable recommendations that drive business decisions.</div>
+        </div>
+        <div class="role-card">
+          <div class="role-card-icon">🤝</div>
+          <div class="role-card-title">Collaborate with Teams</div>
+          <div class="role-card-desc">Work alongside Product, Marketing, Finance, and Operations teams to answer key business questions with data.</div>
+        </div>
+        <div class="role-card">
+          <div class="role-card-icon">📋</div>
+          <div class="role-card-title">Document &amp; Present</div>
+          <div class="role-card-desc">Present data findings through clear reports, slide decks, and dashboards for both technical and non-technical audiences.</div>
+        </div>
+      </div>
+    </div>
 
   </main>
 </div>
 
+<!-- FOOTER -->
 <footer>
   <div>
     <div class="f-brand">Sachi<span>Tech</span> Institute</div>
-    <div class="f-note">Directed by Sachin Thete · Data Science by Kunal Patil</div>
+    <div class="f-note">Directed by Sachin Thete · Data Scientist Kunal Patil</div>
   </div>
-  <div class="f-copy">© 2025 SachiTech. All rights reserved. · Data Analysis Complete Syllabus</div>
+  <div class="f-copy">© 2025 SachiTech. All rights reserved. · Data Analyst Complete Syllabus</div>
 </footer>
 
 <script>
-  /* ── WEEK PILLS ── */
-  document.querySelectorAll('.week-pills').forEach(el => {
-    const w = parseInt(el.dataset.weeks);
-    const t = parseInt(el.dataset.total);
-    const cols = Math.min(t, 20);
-    for (let i = 0; i < cols; i++) {
-      const pill = document.createElement('div');
-      pill.className = 'week-pill' + (i < Math.round(w / t * cols) ? ' filled' : '');
-      el.appendChild(pill);
-    }
-  });
+  /* ── FAB / SIDEBAR DRAWER ── */
+  const fab     = document.getElementById('fab');
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('overlay');
+  const closeBtn = document.getElementById('closeBtn');
 
-  /* ── SIDEBAR PROGRESS ── */
-  const tracks = [
-    { name: 'Python', weeks: 5, cls: '#1a3a5c' },
-    { name: 'Excel',  weeks: 4, cls: '#c8952a' },
-    { name: 'SQL',    weeks: 4, cls: '#2d7a4f' },
-    { name: 'Power BI', weeks: 4, cls: '#8b2fc9' },
-    { name: 'Stats',  weeks: 5, cls: '#e84a2f' },
-    { name: 'ML',     weeks: 8, cls: '#1a3a5c' },
-    { name: 'DL',     weeks: 4, cls: '#c8952a' },
-  ];
-  const total = tracks.reduce((s, t) => s + t.weeks, 0);
-  const pw = document.getElementById('progressWrap');
-  tracks.forEach(t => {
-    const pct = Math.round(t.weeks / total * 100);
-    pw.innerHTML += `
-      <div class="progress-label"><span>${t.name}</span><span>${t.weeks}w</span></div>
-      <div class="progress-bar">
-        <div class="progress-fill" style="width:${pct}%;background:${t.cls};"></div>
-      </div>`;
-  });
+  function openSB()  { sidebar.classList.add('open'); overlay.classList.add('show'); }
+  function closeSB() { sidebar.classList.remove('open'); overlay.classList.remove('show'); }
 
-  /* ── MOBILE SIDEBAR TOGGLE ── */
-  const sidebar  = document.getElementById('sidebar');
-  const overlay  = document.getElementById('overlay');
-  const navBtn   = document.getElementById('navToggle');
-  const closeBtn = document.getElementById('sidebarClose');
+  fab.addEventListener('click', openSB);
+  closeBtn.addEventListener('click', closeSB);
+  overlay.addEventListener('click', closeSB);
+  document.querySelectorAll('.sb-nav a').forEach(a =>
+    a.addEventListener('click', () => { if (window.innerWidth <= 768) closeSB(); })
+  );
 
-  function openSidebar()  { sidebar.classList.add('open'); overlay.classList.add('show'); }
-  function closeSidebar() { sidebar.classList.remove('open'); overlay.classList.remove('show'); }
+  /* ── ACTIVE NAV ── */
+  const sections = document.querySelectorAll('.topic-section[id], .roles-section[id]');
+  const navLinks = document.querySelectorAll('.sb-nav a');
 
-  navBtn.addEventListener('click', openSidebar);
-  closeBtn.addEventListener('click', closeSidebar);
-  overlay.addEventListener('click', closeSidebar);
-
-  /* close sidebar on nav link click (mobile) */
-  document.querySelectorAll('.track-nav a').forEach(a => {
-    a.addEventListener('click', () => {
-      if (window.innerWidth <= 768) closeSidebar();
-    });
-  });
-
-  /* ── ACTIVE NAV HIGHLIGHT on scroll ── */
-  const sections = document.querySelectorAll('.track[id]');
-  const navLinks = document.querySelectorAll('.track-nav a');
-
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        navLinks.forEach(a => {
-          a.classList.toggle('active', a.getAttribute('href') === '#' + entry.target.id);
-        });
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navLinks.forEach(a =>
+          a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id)
+        );
       }
     });
-  }, { rootMargin: '-30% 0px -60% 0px' });
+  }, { rootMargin: '-25% 0px -65% 0px' });
 
-  sections.forEach(s => observer.observe(s));
+  sections.forEach(s => io.observe(s));
 
-  /* ── SEARCH / FILTER ── */
+  /* ── SEARCH ── */
   const searchInput = document.getElementById('searchInput');
 
   searchInput.addEventListener('input', () => {
     const q = searchInput.value.trim().toLowerCase();
 
-    // clear previous highlights
-    document.querySelectorAll('mark').forEach(m => {
-      m.replaceWith(m.textContent);
-    });
+    document.querySelectorAll('mark').forEach(m => m.replaceWith(m.textContent));
 
-    sections.forEach(section => {
-      if (!q) {
-        section.classList.remove('hidden');
-        section.querySelectorAll('.module-card').forEach(c => c.classList.remove('hidden'));
-        return;
-      }
+    sections.forEach(sec => {
+      if (!q) { sec.style.display = ''; sec.querySelectorAll('.card').forEach(c => c.style.display = ''); return; }
 
-      const cards = section.querySelectorAll('.module-card');
-      let sectionMatch = false;
-
+      const cards = sec.querySelectorAll('.card');
+      let match = false;
       cards.forEach(card => {
-        const text = card.textContent.toLowerCase();
-        if (text.includes(q)) {
-          card.classList.remove('hidden');
-          sectionMatch = true;
-          // highlight
-          highlightText(card, q);
-        } else {
-          card.classList.add('hidden');
-        }
+        const hit = card.textContent.toLowerCase().includes(q);
+        card.style.display = hit ? '' : 'none';
+        if (hit) { match = true; highlight(card, q); }
       });
-
-      section.classList.toggle('hidden', !sectionMatch);
+      sec.style.display = match ? '' : 'none';
     });
   });
 
-  function highlightText(el, q) {
-    el.querySelectorAll('li, .mod-title').forEach(node => {
+  function highlight(el, q) {
+    el.querySelectorAll('li, .card-title').forEach(node => {
       node.childNodes.forEach(child => {
-        if (child.nodeType === 3) {
-          const idx = child.textContent.toLowerCase().indexOf(q);
-          if (idx !== -1) {
-            const span = document.createElement('span');
-            span.innerHTML =
-              escHtml(child.textContent.slice(0, idx)) +
-              '<mark>' + escHtml(child.textContent.slice(idx, idx + q.length)) + '</mark>' +
-              escHtml(child.textContent.slice(idx + q.length));
-            child.replaceWith(span);
-          }
-        }
+        if (child.nodeType !== 3) return;
+        const idx = child.textContent.toLowerCase().indexOf(q);
+        if (idx === -1) return;
+        const span = document.createElement('span');
+        span.innerHTML =
+          esc(child.textContent.slice(0, idx)) +
+          '<mark style="background:#bde0ff;color:#0b1f3a;padding:0 1px;">' +
+          esc(child.textContent.slice(idx, idx + q.length)) + '</mark>' +
+          esc(child.textContent.slice(idx + q.length));
+        child.replaceWith(span);
       });
     });
   }
 
-  function escHtml(s) {
-    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-  }
+  function esc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 </script>
 </body>
 </html>
